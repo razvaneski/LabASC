@@ -1,34 +1,29 @@
 .data
-	x: .long 30
-	y: .long 7
-	sum: .space 4
-	dif: .space 4
-	prod: .space 4
-	cat: .space 4
-	rest: .space 4
+    a: .long 5
+    b: .long -3
+    text1: .asciz "a >= b\n"
+    text2: .asciz "a < b\n"
 .text
 .globl _start
-
 _start:
-	mov x, %eax
-	add y, %eax
-	mov %eax, sum
-
-	mov x, %eax
-	sub y, %eax
-	mov %eax, dif
-
-	mov x, %eax
-	mov y, %ebx
-	imul %ebx
-	mov %eax, prod
-
-	mov x, %eax
-	mov y, %ebx
-	idiv %ebx
-	mov %eax, cat
-	mov %ebx, rest
-
-	mov $1, %eax
-	mov $0, %ebx
+    mov a, %eax
+    mov b, %ebx
+    cmp %eax, %ebx
+    jge et
+    mov $4, %eax
+    mov $1, %ebx
+    mov $text2, %ecx
+    mov $7, %edx
+	
 	int $0x80
+	jmp exit
+et:
+    mov $4, %eax
+    mov $1, %ebx
+    mov $text1, %ecx
+    mov $8, %edx
+    int $0x80
+exit:
+    mov $1, %eax
+    mov $0, %ebx
+    int $0x80
