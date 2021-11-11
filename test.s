@@ -3,6 +3,7 @@
 	formatPrintf: .asciz "Numerele %d %d %d\n"
 	x: .long 5
 	y: .long 6
+	z: .space 4
 .text
 
 .global main 
