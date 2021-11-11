@@ -1,6 +1,6 @@
 // printf
 .data
-	formatPrintf: .asciz "Numerele %d %d %d"
+	formatPrintf: .asciz "Numerele %d %d %d\n"
 	x: .long 5
 	y: .long 6
 .text
