@@ -17,7 +17,7 @@ main:
 	sub m, %eax
 	movl %eax, x
 
-	cmp $0, $x
+	cmp $0, %eax
 	jne exit
 
 	movl x, %eax
