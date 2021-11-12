@@ -9,7 +9,7 @@
 
 main:
 	lea v, %edi
-	movl $0, %ecx
+	movl $1, %ecx
 
 	movl (%edi, %ecx, 4), %edx
 	movl %edx, aux
