@@ -31,41 +31,11 @@ main:
 	popl %ebx
 	popl %ebx
 
-	pushl $chDelim
-	pushl $str
-	call strtok
-	popl %ebx
-	popl %ebx
-
-	movl %eax, res
-
-	pushl res
+	pushl str
 	pushl $formatPrintf
 	call printf
 	popl %ebx
 	popl %ebx
-
-	jmp et_loop
-
-et_loop:
-	pushl $chDelim
-	pushl $0
-	call strtok
-	popl %ebx
-	popl %ebx
-
-	movl %eax, res
-
-	cmp $0, res
-	je exit
-
-	pushl res
-	pushl $formatPrintf
-	call printf
-	popl %ebx
-	popl %ebx
-
-	jmp et_loop
 
 exit:
 	mov $1, %eax
