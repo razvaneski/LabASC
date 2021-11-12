@@ -14,7 +14,6 @@ main:
 	cmp %eax, %ebx
 	jne exit
 
-print:
 	pushl $da
 	call printf
 	popl %ebx
