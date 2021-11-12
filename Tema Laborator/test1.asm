@@ -86,6 +86,10 @@ et_sub:
 	pushl %eax
 	je et_loop
 
+et_mul:
+
+et_div:
+
 et_loop:
 	pushl $chDelim
 	pushl $0
