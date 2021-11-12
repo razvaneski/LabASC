@@ -61,11 +61,11 @@ et_mul:
 et_operator:
 	movl $res, %edi
 	xorl %ecx, %ecx
-	movb (%edi, %ecx, 1), %al
+	movb (%edi, %ecx, 4), %al
 	mov %al, aux
 
 
-	pushl aux
+	pushl $aux
 	pushl $formatPrintfCh
 	call printf
 	popl %ebx
