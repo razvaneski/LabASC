@@ -30,7 +30,7 @@ et_loop:
 
 	xorl %eax, %eax
 
-	pushl res
+	pushl $res
 	call atoi
 	popl %ebx
 
