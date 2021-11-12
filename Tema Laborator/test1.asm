@@ -9,7 +9,7 @@
 
 main:
 	movl $v, %edi
-	movl $i, %ecx
+	xorl %ecx, %ecx
 
 	movl %edi, %eax
 	movl %eax, aux
