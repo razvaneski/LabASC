@@ -39,6 +39,12 @@ main:
 
 	pushl nr
 
+operator:
+	popl %ebx
+	movl %ebx, x
+	popl %ebx
+	movl %ebx, y
+
 et_loop:
 	pushl $chDelim
 	pushl $0

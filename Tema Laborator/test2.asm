@@ -1,13 +1,16 @@
 .data
-	s: .asciz "111"
+	s1: .asciz "mul"
+	s2: .asciz "mul"
 	x: .space 4
 	formatPrintf: .asciz "%d\n"
 .text
 .global main
 
 main:
-	pushl $s
-	call atoi
+	pushl s1
+	pushl s2
+	call strcmp
+	popl %ebx
 	popl %ebx
 
 	movl %eax, x
