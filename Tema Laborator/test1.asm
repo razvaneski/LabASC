@@ -31,7 +31,7 @@ main:
 	popl %ebx
 	popl %ebx
 
-	pushl str
+	pushl $str
 	pushl $formatPrintf
 	call printf
 	popl %ebx
