@@ -18,7 +18,7 @@ main:
 
 	movl %eax, res
 
-	pushl %eax
+	pushl res
 	call atoi
 	popl %ebx
 
