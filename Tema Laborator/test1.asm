@@ -34,6 +34,7 @@ et_loop:
 	je exit
 
 	movl %eax, res
+	add $1, res
 
 	pushl res
 	pushl $formatPrintf
