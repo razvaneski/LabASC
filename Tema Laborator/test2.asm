@@ -2,7 +2,7 @@
 	s1: .asciz "mul"
 	s2: .asciz "mul"
 	x: .space 4
-	formatPrintf: .asciz "%s\n"
+	formatPrintf: .asciz "%d\n"
 .text
 .global main
 
