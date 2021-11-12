@@ -16,6 +16,8 @@
 	m: .asciz "mul"
 	d: .asciz "div"
 
+	aux: .space 4
+
 .text
 
 .global main
@@ -60,10 +62,10 @@ et_operator:
 	movl $res, %edi
 	xorl %ecx, %ecx
 	movb (%edi, %ecx, 1), %al
-	movl (%edi, %ecx, 1), %ebx
+	mov %al, aux
 
 
-	pushl %ebx
+	pushl $aux
 	pushl $formatPrintfCh
 	call printf
 	popl %ebx
