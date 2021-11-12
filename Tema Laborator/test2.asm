@@ -1,7 +1,7 @@
 .data
 	s1: .asciz "mul"
 	s2: .asciz "mul"
-	da: .asciz "da\n"
+	da: .asciz "da"
 	x: .space 4
 	formatPrintf: .asciz "%d\n"
 .text
@@ -12,7 +12,7 @@ main:
 	movl s2, %ebx
 
 	cmp %eax, %ebx
-	jne print
+	jne exit
 
 print:
 	pushl $da
