@@ -3,6 +3,7 @@
 	chDelim: .asciz " "
 	formatPrintf: .asciz "%s\n"
 	res: .space 4 
+	res2: .space 4
 .text
 
 .global main
@@ -33,8 +34,14 @@ et_for:
 	je exit
 	
 	movl %eax, res
+
+	pushl res
+	call atoi
+	popl %ebx
+
+	movl %eax, res2
 	
-	pushl res				# este deja un pointer
+	pushl res2				# este deja un pointer
 	pushl $formatPrintf
 	call printf
 	popl %ebx
