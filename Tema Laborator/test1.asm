@@ -21,6 +21,23 @@ main:
 	popl %ebx
 	popl %ebx
 
+et_loop:
+	pushl $chDelim
+	pushl $0
+	call strtok
+	popl %ebx
+	popl %ebx
+
+	movl %eax, res
+	cmp $0, res
+	je exit
+
+	pushl res
+	pushl $formatPrintf
+	call printf
+	popl %ebx
+	popl %ebx
+
 exit:
 	mov $1, %eax
 	xorl %ebx, %ebx
