@@ -1,7 +1,7 @@
 .data
 	chDelim: .asciz " "
 	str: .asciz "2 10 mul 5 div 7 6 sub add"
-	res: .asciz "12345890"
+	res: .space 4
 	nr: .space 4
 	multiplu: .asciz "mul"
 	formatPrintf: .asciz "%d\n"
