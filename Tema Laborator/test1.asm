@@ -28,6 +28,8 @@ et_loop:
 	cmp $0, res
 	je exit
 
+	xorl %eax, %eax
+
 	pushl res
 	call atoi
 	popl %ebx
