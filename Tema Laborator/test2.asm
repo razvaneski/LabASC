@@ -3,6 +3,7 @@
 	s2: .asciz "m"
 	da: .asciz "da\n"
 	x: .space 4
+	m: .long 109
 	formatPrintf: .asciz "%c\n"
 .text
 .global main
@@ -12,11 +13,9 @@ main:
 	xorl %ecx, %ecx
 
 	movl (%edi, %ecx, 4), %eax
+	
+	sub m, %eax
 	movl %eax, x
-
-	movl $s2, %ebx
-	cmp $x, %ebx
-	jne exit
 
 	pushl x
 	pushl $formatPrintf
