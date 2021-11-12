@@ -78,13 +78,3 @@ exit:
 	movl $1, %eax
 	xorl %ebx, %ebx
 	int $0x80
-	
-// citire n 
-// for (ecx = 0; ecx < n; ecx++)
-// {
-//		scanf("%d", v[ecx]);
-//		if (v[ecx] % 2 == 0)
-//		{
-//			sum += v[ecx];
-//		}
-//	}
