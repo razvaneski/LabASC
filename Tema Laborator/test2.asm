@@ -11,7 +11,8 @@ main:
 	movl $s1, %edi
 	xorl %ecx, %ecx
 
-	movl (%edi, %ecx, 4), x
+	movl (%edi, %ecx, 4), %eax
+	movl %eax, x
 
 	pushl x
 	pushl $formatPrintf
