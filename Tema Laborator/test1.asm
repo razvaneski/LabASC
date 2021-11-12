@@ -14,7 +14,7 @@ main:
 	movl %edi, %eax
 	movl %eax, aux
 
-	pushl aux
+	pushl $aux
 	pushl $formatPrintf
 	call printf
 	popl %ebx
