@@ -1,24 +1,24 @@
 .data
 	s1: .asciz "mul"
 	s2: .asciz "mul"
+	da: .asciz "da"
 	x: .space 4
 	formatPrintf: .asciz "%d\n"
 .text
 .global main
 
 main:
-	mov s1, %eax
-	mov s2, %ebx
-	call strcmp
+	movl s1, %eax
+	movl s2, %ebx
 
-	movl %ecx, x
+	cmp %eax, %ebx
+	je print
 
-	pushl x
-	pushl $formatPrintf
+print:
+	pushl $da
 	call printf
 	popl %ebx
-	popl %ebx
-
+	
 exit:
 	movl $1, %eax
 	xorl %ebx, %ebx
