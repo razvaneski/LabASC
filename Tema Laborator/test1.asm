@@ -34,8 +34,12 @@ et_loop:
 	je exit
 
 	movl %eax, res
-	add $1, res
+	cmp "mul", res
+	je printt
 
+	jmp et_loop
+
+printt:
 	pushl res
 	pushl $formatPrintf
 	call printf
