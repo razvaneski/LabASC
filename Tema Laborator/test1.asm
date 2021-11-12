@@ -66,7 +66,7 @@ et_loop:
 	cmp $0, nr
 	je et_operator
 
-	pushl nr
+	# pushl nr
 
 	jmp et_loop
 
