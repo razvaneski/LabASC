@@ -39,7 +39,7 @@ main:
 
 	movl %eax, res
 
-	pushl $res
+	pushl res
 	pushl $formatPrintf
 	call printf
 	popl %ebx
@@ -66,7 +66,7 @@ et_loop:
 
 	movl %eax, res
 
-	pushl $res
+	pushl res
 	pushl $formatPrintf
 	call printf
 	popl %ebx
