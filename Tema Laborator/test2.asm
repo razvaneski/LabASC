@@ -20,19 +20,13 @@ main:
 	xorl %ecx, %ecx
 
 	movl $s1, %edi
-	movl (%edi, %ecx, 4), %eax
-	movl %eax, x
+	movl (%edi, %ecx, 1), %al
+	movl %al, x
 
-	cmp $109, x
+	cmp $109, %al
 	je exit
 
 	pushl x
-	pushl $formatPrintf
-	call printf
-	popl %ebx
-	popl %ebx
-
-	pushl y
 	pushl $formatPrintf
 	call printf
 	popl %ebx
