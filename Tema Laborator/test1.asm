@@ -123,6 +123,15 @@ et_loop:
 	jmp et_loop
 
 exit:
+	popl %ebx
+	movl %ebx, nr
+
+	pushl nr
+	pushl $formatPrintfNr
+	call printf
+	popl %ebx
+	popl %ebx
+	
 	mov $1, %eax
 	xorl %ebx, %ebx
 	int $0x80
