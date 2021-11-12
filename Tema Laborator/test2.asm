@@ -14,7 +14,7 @@ main:
 	movl (%edi, %ecx, 4), %eax
 	movl %eax, x
 
-	movl s2, %ebx
+	movl $s2, %ebx
 	cmp x, %ebx
 	jne exit
 
