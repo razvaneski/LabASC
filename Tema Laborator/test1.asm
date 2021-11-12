@@ -37,7 +37,7 @@ main:
 	cmp $0, nr
 	je et_operator
 
-	pushl 
+	pushl nr
 	jmp et_loop
 
 et_operator:
