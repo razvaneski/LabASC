@@ -36,7 +36,8 @@ et_for:
 	movl %eax, res
 
 	pushl %eax
-	pushl %edi
+	pushl %ecx
+	pushl %edx
 
 	pushl res
 	call atoi
@@ -44,7 +45,8 @@ et_for:
 
 	movl %eax, res2
 
-	popl %edi
+	popl %edx
+	popl %ecx
 	popl %eax
 	
 	pushl res2				# este deja un pointer
