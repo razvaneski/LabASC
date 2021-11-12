@@ -16,7 +16,7 @@
 	doi: .long 2
 	
 	formatScanf: .asciz "%d"
-	formatPrintf: .asciz "%d"
+	formatPrintf: .asciz "%d\n"
 .text
 
 .global main
@@ -65,7 +65,7 @@ et_for2:
 
 	pushl $n
 	pushl $formatPrintf
-	call formatPrintf
+	call printf
 	popl %ebx
 	popl %ebx
 
