@@ -35,11 +35,15 @@ et_for:
 	
 	movl %eax, res
 
+	pushl %eax
+
 	pushl res
 	call atoi
 	popl %ebx
 
 	movl %eax, res2
+
+	popl %eax
 	
 	pushl res2				# este deja un pointer
 	pushl $formatPrintf
