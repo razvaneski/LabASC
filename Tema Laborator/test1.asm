@@ -65,7 +65,7 @@ et_operator:
 	mov %al, aux
 
 
-	pushl $aux
+	pushl aux
 	pushl $formatPrintfCh
 	call printf
 	popl %ebx
