@@ -3,7 +3,7 @@
 	da: .asciz "da\n"
 	x: .space 4
 	m: .asciz "m"
-	formatPrintf: .asciz "%d\n"
+	formatPrintf: .asciz "%c\n"
 .text
 .global main
 
