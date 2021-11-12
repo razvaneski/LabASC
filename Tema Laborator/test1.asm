@@ -1,24 +1,46 @@
 .data
-  v: .asciz "A", "B", "C", "D"
-  i: .long 0
-  aux: .space 4
-  formatPrintf: .asciz "%d\n"
+	str: .asciz "Siruri de caractere"
+	chDelim: .asciz " "
+	formatPrintf: .asciz "%s\n"
+	res: .space 4 
 .text
 
 .global main
 
 main:
-	movl $v, %edi
-	movl $1, %ecx
-
-	movl (%edi, %ecx, 4), %edx
-	movl %edx, aux
-
-	pushl aux
+	pushl $chDelim
+	pushl $str
+	call strtok 
+	popl %ebx
+	popl %ebx
+	
+	movl %eax, res
+	
+	pushl res				# este deja un pointer
 	pushl $formatPrintf
 	call printf
 	popl %ebx
 	popl %ebx
+	
+et_for:
+	pushl $chDelim
+	pushl $0
+	call strtok
+	popl %ebx
+	popl %ebx 
+	
+	cmp $0, %eax
+	je exit
+	
+	movl %eax, res
+	
+	pushl res				# este deja un pointer
+	pushl $formatPrintf
+	call printf
+	popl %ebx
+	popl %ebx
+	
+	jmp et_for	
 
 exit:
 	movl $1, %eax
