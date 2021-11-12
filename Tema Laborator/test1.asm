@@ -29,6 +29,9 @@ et_loop:
 	popl %ebx
 
 	movl %eax, res
+
+	xorl %eax, %eax
+	
 	cmp $0, res
 	je exit
 
