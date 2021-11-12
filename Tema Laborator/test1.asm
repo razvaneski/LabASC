@@ -31,6 +31,7 @@ et_loop:
 	movl %eax, res
 
 	xorl %eax, %eax
+	xorl %ecx, %ecx
 	
 	cmp $0, res
 	je exit
