@@ -5,6 +5,10 @@
 	nr: .space 4
 	formatPrintf: .asciz "%s\n"
 	formatPrintfNr: .asciz "%d\n"
+
+	x: .space 4
+	y: .space 4
+
 .text
 
 .global main
@@ -22,7 +26,7 @@ main:
 	call atoi
 	popl %ebx
 
-	mov %eax, nr
+	movl %eax, nr
 
 	pushl nr
 	pushl $formatPrintfNr
@@ -47,7 +51,7 @@ et_loop:
 	call atoi
 	popl %ebx
 
-	mov %eax, nr
+	movl %eax, nr
 
 	pushl nr
 	pushl $formatPrintfNr
@@ -62,4 +66,3 @@ exit:
 	xorl %ebx, %ebx
 	int $0x80
 
-	
