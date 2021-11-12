@@ -4,6 +4,7 @@
 	res: .space 4
 	nr: .space 4
 	formatPrintf: .asciz "%s\n"
+	formatPrintfNr: .asciz "%d\n"
 .text
 
 .global main
@@ -12,6 +13,20 @@ main:
 	pushl $chDelim
 	pushl $str
 	call strtok
+	popl %ebx
+	popl %ebx
+
+	movl %eax, res
+
+	pushl $res
+	call atoi
+	popl %ebx
+
+	mov %eax, nr
+
+	pushl nr
+	pushl $formatPrintfNr
+	call printf
 	popl %ebx
 	popl %ebx
 
