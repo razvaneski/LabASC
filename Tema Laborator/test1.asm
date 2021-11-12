@@ -56,8 +56,8 @@ et_add:
 	je et_loop
 
 et_operator:
-	movl $res, %ebx
-	cmp $a, %ebx
+	movl res, %ebx
+	cmp a, %ebx
 	je et_add
 
 
