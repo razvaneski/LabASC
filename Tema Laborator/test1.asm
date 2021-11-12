@@ -43,31 +43,10 @@ main:
 	movl %eax, nr
 
 	cmp $0, nr
-	je et_operator
+	je et_loop
 
 	pushl nr
 	jmp et_loop
-
-et_add:
-	pushl res
-	pushl $formatPrintf
-	call printf
-	popl %ebx
-	popl %ebx
-
-	popl %ebx
-	movl %ebx, x
-	popl %ebx
-	add x, %ebx
-	pushl %ebx
-	
-	je et_loop
-
-et_operator:
-	movl res, %ebx
-	cmp a, %ebx
-	je et_add
-
 
 et_loop:
 	pushl $chDelim
@@ -89,7 +68,7 @@ et_loop:
 	movl %eax, nr
 
 	cmp $0, nr
-	#je et_operator
+	je et_loop
 
 	pushl nr
 
