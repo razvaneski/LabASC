@@ -8,7 +8,7 @@
 .global main
 
 main:
-	movl $v, %edi
+	lea v, %edi
 	xorl %ecx, %ecx
 
 	movl %edi, %eax
