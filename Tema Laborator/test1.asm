@@ -89,7 +89,7 @@ et_loop:
 	movl %eax, nr
 
 	cmp $0, nr
-	je et_operator
+	#je et_operator
 
 	pushl nr
 
