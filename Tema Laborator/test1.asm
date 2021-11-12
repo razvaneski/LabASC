@@ -67,23 +67,15 @@ et_loop:
 
 	movl %eax, nr
 
-	cmp $0, nr
-	je et_loop
-
 	pushl nr
-
-	jmp et_loop
-
-exit:
-	popl %ebx
-	movl %ebx, rezultat
-
-	pushl rezultat
 	pushl $formatPrintfNr
 	call printf
 	popl %ebx
 	popl %ebx
 
+	jmp et_loop
+
+exit:
 	mov $1, %eax
 	xorl %ebx, %ebx
 	int $0x80
