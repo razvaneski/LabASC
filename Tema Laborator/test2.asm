@@ -7,11 +7,9 @@
 .global main
 
 main:
-	pushl s1
-	pushl s2
+	mov s1, %eax
+	mov s2, %ebx
 	call strcmp
-	popl %ebx
-	popl %ebx
 
 	movl %ecx, x
 
