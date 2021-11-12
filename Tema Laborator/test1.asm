@@ -40,7 +40,7 @@ main:
 
 et_operator:
 	pushl res
-	pushl formatPrintf
+	pushl formatPrintfNr
 	call printf
 	popl %ebx
 	popl %ebx
