@@ -33,7 +33,7 @@ et_loop:
 	cmp $0, res
 	je exit
 
-	movl $5, %eax
+	#movl $5, %eax
 
 	movl %eax, res
 
