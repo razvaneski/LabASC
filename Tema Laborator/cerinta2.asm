@@ -16,7 +16,7 @@
 	doi: .long 2
 	
 	formatScanf: .asciz "%d"
-	formatPrintf: .asciz "%d\n"
+	formatPrintf: .asciz "%d "
 .text
 
 .global main
