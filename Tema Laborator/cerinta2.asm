@@ -63,10 +63,10 @@ et_for2:
 
 	pushl %ecx
 
-	movl (%edi, %ecx, 4), aux
-	movl $aux, %eax
+	movl (%edi, %ecx, 4), %eax
+	movl %eax, aux
 
-	pushl %eax
+	pushl $aux
 	pushl $formatPrintf
 	call formatPrintf
 	popl %ebx
