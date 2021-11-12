@@ -56,8 +56,11 @@ et_add:
 	je et_loop
 
 et_operator:
-	movl res, %ebx
-	cmp a, %ebx
+	movl $res, %edi
+	xorl %ecx, %ecx
+	movb (%edi, %ecx, 1), %al
+
+	cmp $109, %al
 	je et_add
 
 
