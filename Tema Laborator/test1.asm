@@ -30,9 +30,11 @@ et_loop:
 
 	movl %eax, res
 
-	xorl %eax, %eax
-	xorl %ecx, %ecx
-	xorl %edx, %edx
+	pushl $res
+	call atoi
+	popl %ebx
+
+	movl %eax, res
 	
 	cmp $0, res
 	je exit
