@@ -62,7 +62,7 @@ et_for2:
 
 	pushl %ecx
 
-	movl (%edi, %ecx, 4), %eax
+	movl $(%edi, %ecx, 4), %eax
 
 	pushl %eax
 	pushl $formatPrintf
