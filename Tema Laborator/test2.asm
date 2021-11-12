@@ -1,6 +1,6 @@
 .data
 	s1: .asciz "mul"
-	s2: .asciz "mul"
+	s2: .asciz "muf"
 	da: .asciz "da\n"
 	x: .space 4
 	formatPrintf: .asciz "%d\n"
