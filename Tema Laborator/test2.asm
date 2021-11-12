@@ -1,5 +1,5 @@
 .data
-	s1: .asciz "mul"
+	s1: .asciz "ful"
 	formatScanf: .asciz "%s"
 	x: .space 4
 	y: .space 4
