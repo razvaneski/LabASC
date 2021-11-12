@@ -39,7 +39,7 @@ main:
 	pushl nr
 
 et_operator:
-	pushl res
+	pushl nr
 	pushl formatPrintfNr
 	call printf
 	popl %ebx
