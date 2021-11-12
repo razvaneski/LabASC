@@ -15,7 +15,7 @@ main:
 	movl %eax, x
 
 	movl $s2, %ebx
-	cmp x, %ebx
+	cmp $x, %ebx
 	jne exit
 
 	pushl x
