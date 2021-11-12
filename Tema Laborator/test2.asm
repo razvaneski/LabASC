@@ -1,6 +1,6 @@
 .data
 	s1: .asciz "mul"
-	s2: .asciz "muf"
+	s2: .asciz "m"
 	da: .asciz "da\n"
 	x: .space 4
 	formatPrintf: .asciz "%c\n"
@@ -13,6 +13,10 @@ main:
 
 	movl (%edi, %ecx, 4), %eax
 	movl %eax, x
+
+	movl s2, %ebx
+	cmp x, %ebx
+	jne exit
 
 	pushl x
 	pushl $formatPrintf
