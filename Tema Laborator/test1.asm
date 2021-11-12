@@ -40,11 +40,6 @@ main:
 	pushl nr
 	jmp et_loop
 
-et_operator:
-	movl $res, %ebx
-	cmp $a, %ebx
-	je et_add
-
 et_add:
 	pushl res
 	pushl $formatPrintf
@@ -59,6 +54,11 @@ et_add:
 	pushl %ebx
 	
 	je et_loop
+
+et_operator:
+	movl $res, %ebx
+	cmp $a, %ebx
+	je et_add
 
 
 et_loop:
