@@ -39,11 +39,7 @@ main:
 	pushl nr
 
 et_operator:
-	pushl nr
-	pushl formatPrintfNr
-	call printf
-	popl %ebx
-	popl %ebx
+	
 	
 	jmp et_loop
 
