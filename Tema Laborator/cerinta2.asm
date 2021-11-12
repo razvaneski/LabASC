@@ -15,7 +15,7 @@
 	doi: .long 2
 	
 	formatScanf: .asciz "%d"
-	formatPrintf: .asciz "Suma elementelor pare este %d\n"
+	formatPrintf: .asciz "%d\n"
 .text
 
 .global main
@@ -32,7 +32,7 @@ main:
 	xorl %ecx, %ecx				# %ecx = 0, pe post de index
 et_for:
 	cmp n, %ecx
-	je exit
+	je cont
 	
 	// (%edi, %ecx, 4) - edi[ecx] - v[i]
 	pushl %ecx					# pregatesc restaurarea lui ecx
@@ -49,32 +49,34 @@ et_for:
 	movl elemCurent, %eax
 	movl %eax, (%edi, %ecx, 4)
 	
-	// verific daca elementul curent este par 
-	xorl %edx, %edx
-	divl doi
-	// divl op : (edx, eax) := eax / op 
-	// in edx am restul impartirii
-	
-	cmp $0, %edx
-	je este_par
-	
-cont:
 	incl %ecx
 	jmp et_for 
 	
-este_par:
-	movl (%edi, %ecx, 4), %ebx
-	addl %ebx, sum 
-	jmp cont
-	
+cont:
+	movl $v, %edi
+	xorl %ecx, %ecx
+
+et_for2:
+	cmp n, %ecx
+	je exit
+
+	pushl %ecx
+
+	movl (%edi, %ecx, 4), %eax
+
+	pushl %eax
+	pushl %formatPrintf
+	call formatPrintf
+	popl %ebx
+	popl %ebx
+
+	popl %ecx
+
+	incl %ecx
+	jmp et_for2
+
 
 exit:
-	pushl sum
-	pushl $formatPrintf
-	call printf
-	popl %ebx
-	popl %ebx
-	
 	movl $1, %eax
 	xorl %ebx, %ebx
 	int $0x80
