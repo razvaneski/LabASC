@@ -10,10 +10,10 @@
 	y: .space 4
 	rezultat: .space 4
 
-	a: .asciz "add"
-	s: .asciz "sub"
-	m: .asciz "mul"
-	d: .asciz "div"
+	a: .ascii "add"
+	s: .ascii "sub"
+	m: .ascii "mul"
+	d: .ascii "div"
 
 .text
 
