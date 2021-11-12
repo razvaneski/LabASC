@@ -1,5 +1,5 @@
 .data
-	s: .asciz "11"
+	s: .asciz "abc"
 	x: .space 4
 	formatPrintf: .asciz "%d\n"
 .text
