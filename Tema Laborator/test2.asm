@@ -1,5 +1,5 @@
 .data
-	s: .asciz "111 "
+	s: .asciz "111"
 	x: .space 4
 	formatPrintf: .asciz "%d\n"
 .text
@@ -8,6 +8,14 @@
 main:
 	pushl $s
 	call atoi
+	popl %ebx
+
+	movl %eax, x
+
+	pushl x
+	pushl $formatPrintf
+	call printf
+	popl %ebx
 	popl %ebx
 
 exit:

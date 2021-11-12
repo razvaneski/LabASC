@@ -35,8 +35,6 @@ et_loop:
 
 	movl %eax, res
 
-	movl $5, %eax
-
 	pushl res
 	pushl $formatPrintf
 	call printf
