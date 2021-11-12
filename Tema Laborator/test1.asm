@@ -25,7 +25,7 @@ main:
 	mov %eax, nr
 
 	pushl nr
-	pushl $formatPrintf
+	pushl $formatPrintfNr
 	call printf
 	popl %ebx
 	popl %ebx
