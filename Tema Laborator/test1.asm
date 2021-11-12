@@ -9,10 +9,10 @@
 
 main:
 	lea v, %edi
-	xorl %ecx, %ecx
+	movl $0, %ecx
 
-	xorl %eax, %eax
-	mov %eax, aux
+	movl (%edi, %ecx, 4), %edx
+	movl %edx, aux
 
 	pushl aux
 	pushl $formatPrintf
