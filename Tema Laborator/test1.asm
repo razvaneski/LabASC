@@ -28,6 +28,9 @@ main:
 
 	movl %eax, nr
 
+	cmp $0, nr
+	je et_loop
+
 	pushl nr
 	pushl $formatPrintfNr
 	call printf
@@ -52,6 +55,9 @@ et_loop:
 	popl %ebx
 
 	movl %eax, nr
+
+	cmp $0, nr
+	je et_loop
 
 	pushl nr
 	pushl $formatPrintfNr
