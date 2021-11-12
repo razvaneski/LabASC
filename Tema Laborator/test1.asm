@@ -16,13 +16,6 @@ main:
 	popl %ebx
 	popl %ebx
 
-	movl %eax, res
-	pushl res
-	pushl $formatPrintf
-	call printf
-	popl %ebx
-	popl %ebx
-
 et_loop:
 	pushl $chDelim
 	pushl $0
