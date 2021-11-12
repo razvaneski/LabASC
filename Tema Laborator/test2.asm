@@ -17,13 +17,6 @@ main:
 	sub m, %eax
 	movl %eax, x
 
-	cmp $0, %eax
-	jne exit
-
-	movl x, %eax
-	add m, %eax
-	movl %eax, x
-
 	pushl x
 	pushl $formatPrintf
 	call printf
