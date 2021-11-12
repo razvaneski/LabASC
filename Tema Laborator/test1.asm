@@ -38,6 +38,8 @@ et_loop:
 	popl %ebx
 	popl %ebx
 
+	jmp et_loop
+
 exit:
 	mov $1, %eax
 	xorl %ebx, %ebx
