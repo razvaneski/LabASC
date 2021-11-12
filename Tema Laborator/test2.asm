@@ -3,7 +3,7 @@
 	s2: .asciz "muf"
 	da: .asciz "da\n"
 	x: .space 4
-	formatPrintf: .asciz "%d\n"
+	formatPrintf: .asciz "%c\n"
 .text
 .global main
 
@@ -14,7 +14,7 @@ main:
 	movl (%edi, %ecx, 4), %eax
 	movl %eax, x
 
-	pushl $x
+	pushl x
 	pushl $formatPrintf
 	call printf
 	popl %ebx
