@@ -1,5 +1,5 @@
 .data
-	str: .asciz "Siruri de caractere"
+	str: .asciz "2 10 mul 5 div 7 6 sub add"
 	chDelim: .asciz " "
 	formatPrintf: .asciz "%s\n"
 	res: .space 4 
