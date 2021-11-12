@@ -45,16 +45,6 @@ main:
 	popl %ebx
 	popl %ebx
 
-	pushl res
-	call atoi
-	popl %ebx
-
-	movl %eax, nr
-
-	cmp $0, nr
-	je et_loop
-
-	pushl nr
 	jmp et_loop
 
 et_loop:
@@ -66,26 +56,14 @@ et_loop:
 
 	movl %eax, res
 
+	cmp $0, res
+	je exit
+
 	pushl res
 	pushl $formatPrintf
 	call printf
 	popl %ebx
 	popl %ebx
-
-	cmp $0, res
-	je exit
-
-
-	pushl res
-	call atoi
-	popl %ebx
-
-	movl %eax, nr
-
-	cmp $0, nr
-	je et_loop
-
-	pushl nr
 
 	jmp et_loop
 
