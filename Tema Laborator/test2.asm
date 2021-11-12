@@ -12,13 +12,13 @@ main:
 	movl s2, %ebx
 
 	cmp %eax, %ebx
-	je print
+	jne print
 
 print:
 	pushl $da
 	call printf
 	popl %ebx
-	
+
 exit:
 	movl $1, %eax
 	xorl %ebx, %ebx
