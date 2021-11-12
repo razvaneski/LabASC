@@ -1,6 +1,6 @@
 .data
-	s1: .asciz "mul"
-	da: .asciz "da\n"
+	s1: .space 40
+	formatScanf: .asciz "%s"
 	x: .space 4
 	y: .space 4
 	m: .asciz "m"
@@ -9,15 +9,19 @@
 .global main
 
 main:
+	pushl $s1
+	pushl $formatScanf
+	call scanf
+	popl %ebx
+	popl %ebx
+	
+
+
 	xorl %ecx, %ecx
 
 	movl $s1, %edi
 	movl (%edi, %ecx, 4), %eax
 	movl %eax, x
-
-	movl $m, %edi
-	movl (%edi, %ecx, 4), %eax
-	movl %eax, y
 
 	cmp $109, x
 	je exit
