@@ -33,7 +33,7 @@ et_loop:
 	cmp $0, res
 	je exit
 
-	pushl $res
+	pushl res
 	pushl $formatPrintf
 	call printf
 	popl %ebx
