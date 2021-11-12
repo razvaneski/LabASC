@@ -3,8 +3,7 @@
 	str: .asciz "2 10 mul 5 div 7 6 sub add"
 	res: .space 4
 	nr: .space 4
-	multiplu: .asciz "mul"
-	formatPrintf: .asciz "%d\n"
+	formatPrintf: .asciz "%s\n"
 .text
 
 .global main
