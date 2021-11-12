@@ -34,6 +34,12 @@ et_loop:
 
 	movl %eax, nr
 
+	pushl nr
+	pushl $formatPrintf
+	call printf
+	popl %ebx
+	popl %ebx
+
 	jmp et_loop
 
 exit:
