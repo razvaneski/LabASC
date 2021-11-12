@@ -19,6 +19,9 @@ main:
 	movl (%edi, %ecx, 4), %eax
 	movl %eax, y
 
+	cmp x, %eax
+	je exit
+
 	pushl x
 	pushl $formatPrintf
 	call printf
