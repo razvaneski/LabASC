@@ -40,9 +40,9 @@ main:
 	pushl nr
 
 et_operator:
-	
-	
-	jmp et_loop
+	movl nr, %eax
+	cmp a, %eax
+	je exit
 
 et_loop:
 	pushl $chDelim
@@ -66,7 +66,7 @@ et_loop:
 	cmp $0, nr
 	je et_operator
 
-	# pushl nr
+	pushl nr
 
 	jmp et_loop
 
