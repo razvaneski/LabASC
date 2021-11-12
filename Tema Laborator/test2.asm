@@ -8,14 +8,15 @@
 .global main
 
 main:
-	movl s1, %eax
-	movl s2, %ebx
+	movl $s1, %edi
+	xorl %ecx, %ecx
 
-	cmp s2, %eax
-	jne exit
+	movl (%edi, %ecx, 4), x
 
-	pushl $da
+	pushl x
+	pushl $formatPrintf
 	call printf
+	popl %ebx
 	popl %ebx
 
 exit:
