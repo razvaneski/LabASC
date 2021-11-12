@@ -33,6 +33,10 @@ et_loop:
 	cmp $0, res
 	je exit
 
+	pushl $res
+	call atoi
+	popl %ebx
+
 	movl %eax, res
 
 	pushl res
