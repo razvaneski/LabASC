@@ -1,9 +1,8 @@
 .data
 	s1: .asciz "mul"
-	s2: .asciz "m"
 	da: .asciz "da\n"
 	x: .space 4
-	m: .long 109
+	m: .asciz "m"
 	formatPrintf: .asciz "%d\n"
 .text
 .global main
