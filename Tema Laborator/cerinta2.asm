@@ -9,7 +9,8 @@
 	n: .space 4 	# stochez un long, deci 4B 
 	v: .space 80 	# 20 de elemente * 4B = 80B
 	elemCurent: .space 4
-	
+	aux: .space 4
+
 	sum: .long 0
 	
 	doi: .long 2
@@ -62,7 +63,8 @@ et_for2:
 
 	pushl %ecx
 
-	movl $(%edi, %ecx, 4), %eax
+	movl (%edi, %ecx, 4), aux
+	movl $aux, %eax
 
 	pushl %eax
 	pushl $formatPrintf
