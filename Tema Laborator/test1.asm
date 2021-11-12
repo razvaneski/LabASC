@@ -11,7 +11,7 @@ main:
 	lea v, %edi
 	movl $0, %ecx
 
-	movl (%edi, %ecx, 4), %edx
+	movl %edi, %edx
 	movl %edx, aux
 
 	pushl aux
