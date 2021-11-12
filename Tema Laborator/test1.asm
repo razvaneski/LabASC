@@ -34,55 +34,18 @@ main:
 	movl %eax, nr
 
 	cmp $0, nr
-	je operator
+	je et_operator
 
 	pushl nr
 
-operator:
+et_operator:
+	pushl res
+	pushl formatPrintf
+	call printf
 	popl %ebx
-	movl %ebx, x
 	popl %ebx
-	movl %ebx, y
-
-	movl nr, %eax
-
-	movl a, %ebx
-	cmp %eax, %ebx
-	je et_add
-
-	movl s, %ebx
-	cmp %eax, %ebx
-	je et_sub
-
-	movl m, %ebx
-	cmp %eax, %ebx
-	je et_mul
-
-	movl d, %ebx
-	cmp %eax, %ebx
-	je et_div
-
+	
 	jmp et_loop
-
-et_add:
-	movl x, %eax
-	movl y, %ebx
-	add %ebx, %eax
-
-	pushl %eax
-	je et_loop
-
-et_sub:
-	movl x, %eax
-	movl y, %ebx
-	sub %ebx, %eax
-
-	pushl %eax
-	je et_loop
-
-et_mul:
-
-et_div:
 
 et_loop:
 	pushl $chDelim
@@ -104,7 +67,7 @@ et_loop:
 	movl %eax, nr
 
 	cmp $0, nr
-	je operator
+	je et_operator
 
 	pushl nr
 
