@@ -51,6 +51,12 @@ et_add:
 	call printf
 	popl %ebx
 	popl %ebx
+
+	popl %ebx
+	movl %ebx, x
+	popl %ebx
+	add x, %ebx
+	pushl %ebx
 	
 	je et_loop
 
