@@ -1,6 +1,6 @@
 .data
 	chDelim: .asciz " "
-	str: .asciz "2 10 mul 5 mul 7 6 mul mul"
+	str: .asciz "2 10 mul 5 add 7 6 mul sub"
 	res: .space 4
 	nr: .space 4
 	formatPrintf: .asciz "%s\n"
