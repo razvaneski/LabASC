@@ -13,7 +13,7 @@ main:
 	popl %ebx
 	popl %ebx
 
-	movl %eax, x
+	movl %ecx, x
 
 	pushl x
 	pushl $formatPrintf
