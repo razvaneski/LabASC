@@ -11,10 +11,10 @@ main:
 	lea v, %edi
 	xorl %ecx, %ecx
 
-	movl %edi, %eax
-	movl %eax, aux
+	xorl %eax, %eax
+	mov %eax, aux
 
-	pushl $aux
+	pushl aux
 	pushl $formatPrintf
 	call printf
 	popl %ebx
