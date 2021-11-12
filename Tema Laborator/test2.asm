@@ -14,8 +14,6 @@ main:
 	call scanf
 	popl %ebx
 	popl %ebx
-	
-
 
 	xorl %ecx, %ecx
 

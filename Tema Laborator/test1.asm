@@ -1,6 +1,8 @@
 .data
+	formatScanf: .asciz "%s"
+
 	chDelim: .asciz " "
-	str: .asciz "2 10 mul 5 add 7 6 mul sub"
+	str: .space 100 # VERIFICA DIMENSIUNEA
 	res: .space 4
 	nr: .space 4
 	formatPrintf: .asciz "%s\n"
@@ -20,6 +22,12 @@
 .global main
 
 main:
+	pushl $str
+	pushl $formatScanf
+	call scanf
+	popl %ebx
+	popl %ebx
+
 	pushl $chDelim
 	pushl $str
 	call strtok
