@@ -33,19 +33,7 @@ et_loop:
 	cmp $0, res
 	je exit
 
-	pushl %eax
-	pushl %ecx
-	pushl %edx
-
-	pushl $res
-	call atoi
-	popl %ebx
-
 	movl %eax, res
-
-	popl %edx
-	popl %ecx
-	popl %eax
 
 	pushl res
 	pushl $formatPrintf
