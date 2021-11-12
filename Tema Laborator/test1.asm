@@ -39,6 +39,12 @@ main:
 
 	movl %eax, res
 
+	pushl $res
+	pushl $formatPrintf
+	call printf
+	popl %ebx
+	popl %ebx
+
 	pushl res
 	call atoi
 	popl %ebx
