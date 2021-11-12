@@ -1,72 +1,90 @@
-// strtok in assembly 
-// "Sir de caractere"
-// Sir 
-// de 
-// caractere
-// strtok(sir, " ");
-// "x,y,z" 
-// strtok(sir, ",");
-// "s+-y+/z"
-// strotk(sir, "+-/"); -> s, y, z 
-// ma ajuta sa parsez un sir de caractere dupa anumite simboluri
-
-/*
-char *p = strtok(str, " ");
-
-while (p != NULL)
-{
-	// prelucrare pe p
-	p = strtok(NULL, " ");
-}
-*/ 
+// se citesc de la tastatura
+// n -> dimensiunea array-ului
+// si n elemente -> continutul array-ului
+// sa se afiseze pe ecran 
+// Suma elementelor pare este: %d\n
+// array-ul are cel mult 20 de elemente
 
 .data
-	str: .asciz "Siruri de caractere"
-	chDelim: .asciz " "
-	formatPrintf: .asciz "%s\n"
-	res: .space 4 
+	n: .space 4 	# stochez un long, deci 4B 
+	v: .space 80 	# 20 de elemente * 4B = 80B
+	elemCurent: .space 4
+	
+	sum: .long 0
+	
+	doi: .long 2
+	
+	formatScanf: .asciz "%d"
+	formatPrintf: .asciz "Suma elementelor pare este %d\n"
 .text
 
 .global main
 
 main:
-	pushl $chDelim
-	pushl $str
-	call strtok 
+	// scanf("%d", &n)
+	pushl $n
+	pushl $formatScanf
+	call scanf
 	popl %ebx
 	popl %ebx
 	
-	movl %eax, res
-	
-	pushl res				# este deja un pointer
-	pushl $formatPrintf
-	call printf
-	popl %ebx
-	popl %ebx
-	
+	movl $v, %edi				# %edi retine adresa lui v
+	xorl %ecx, %ecx				# %ecx = 0, pe post de index
 et_for:
-	pushl $chDelim
-	pushl $0
-	call strtok
-	popl %ebx
-	popl %ebx 
-	
-	cmp $0, %eax
+	cmp n, %ecx
 	je exit
 	
-	movl %eax, res
+	// (%edi, %ecx, 4) - edi[ecx] - v[i]
+	pushl %ecx					# pregatesc restaurarea lui ecx
 	
-	pushl res				# este deja un pointer
+	pushl $elemCurent
+	pushl $formatScanf
+	call scanf
+	popl %ebx
+	popl %ebx
+	// in acest moment, reg. %eax, %ecx, %edx sunt alterati
+	
+	popl %ecx					# am restaurat ecx
+	
+	movl elemCurent, %eax
+	movl %eax, (%edi, %ecx, 4)
+	
+	// verific daca elementul curent este par 
+	xorl %edx, %edx
+	divl doi
+	// divl op : (edx, eax) := eax / op 
+	// in edx am restul impartirii
+	
+	cmp $0, %edx
+	je este_par
+	
+cont:
+	incl %ecx
+	jmp et_for 
+	
+este_par:
+	movl (%edi, %ecx, 4), %ebx
+	addl %ebx, sum 
+	jmp cont
+	
+
+exit:
+	pushl sum
 	pushl $formatPrintf
 	call printf
 	popl %ebx
 	popl %ebx
 	
-	jmp et_for	
-
-exit:
 	movl $1, %eax
 	xorl %ebx, %ebx
 	int $0x80
 	
-// string.h si stdio.h 
+// citire n 
+// for (ecx = 0; ecx < n; ecx++)
+// {
+//		scanf("%d", v[ecx]);
+//		if (v[ecx] % 2 == 0)
+//		{
+//			sum += v[ecx];
+//		}
+//	}
