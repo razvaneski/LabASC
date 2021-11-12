@@ -18,13 +18,13 @@ main:
 
 	movl %eax, res
 
-	pushl $res
+	pushl %eax
 	call atoi
 	popl %ebx
 
 	mov %eax, nr
 
-	pushl res
+	pushl nr
 	pushl $formatPrintf
 	call printf
 	popl %ebx
