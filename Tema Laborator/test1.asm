@@ -45,11 +45,7 @@ et_operator:
 	je et_add
 
 et_add:
-	popl %eax
-	popl %ebx
-	add %eax, %ebx
-
-	pushl %ebx
+	
 	je et_loop
 
 
