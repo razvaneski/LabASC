@@ -40,7 +40,7 @@ main:
 	pushl nr
 
 et_operator:
-	movl res, %ebx
+	movl $res, %ebx
 	cmp a, %ebx
 	je et_add
 
