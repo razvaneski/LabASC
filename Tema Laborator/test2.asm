@@ -19,7 +19,7 @@ main:
 	movl (%edi, %ecx, 4), %eax
 	movl %eax, y
 
-	cmp $x, %eax
+	cmp x, y
 	je exit
 
 	pushl x
