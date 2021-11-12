@@ -45,7 +45,7 @@ et_operator:
 	je et_add
 
 et_add:
-	pushl $a
+	pushl $res
 	pushl $formatPrintf
 	call printf
 	popl %ebx
