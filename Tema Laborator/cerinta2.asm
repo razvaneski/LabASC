@@ -17,6 +17,7 @@
 	
 	formatScanf: .asciz "%d"
 	formatPrintf: .asciz "%d "
+	formatFinal: .asciz "\n"
 .text
 
 .global main
@@ -79,6 +80,11 @@ et_for2:
 
 
 exit:
+
+	pushl $formatFinal
+	call printf
+	popl %ebx
+
 	movl $1, %eax
 	xorl %ebx, %ebx
 	int $0x80
