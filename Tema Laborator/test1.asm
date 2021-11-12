@@ -1,5 +1,5 @@
 .data
-  v: .asciz "ABCDEFGHIJ"
+  v: .long 10, 20, 30, 40
   i: .long 0
   aux: .space 4
   formatPrintf: .asciz "%d\n"
