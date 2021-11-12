@@ -2,6 +2,7 @@
 	chDelim: .asciz " "
 	str: .asciz "2 10 mul 5 div 7 6 sub add"
 	res: .space 4
+	multiplu: .asciz "mul"
 	formatPrintf: .asciz "%s\n"
 .text
 
@@ -34,7 +35,7 @@ et_loop:
 	je exit
 
 	movl %eax, res
-	cmp "mul", res
+	cmp multiplu, res
 	je printt
 
 	jmp et_loop
