@@ -11,7 +11,7 @@ main:
 	movl $v, %edi
 	movl $i, %ecx
 
-	movl (%edi, %ecx, 4), %eax
+	movl %edi, %eax
 	movl %eax, aux
 
 	pushl aux
