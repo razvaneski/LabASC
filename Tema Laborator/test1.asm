@@ -65,9 +65,10 @@ et_operator:
 
 	pushl %ebx
 	pushl $formatPrintfCh
+	call printf
 	popl %ebx
 	popl %ebx
-	
+
 	cmp $109, %al
 	je et_mul
 
