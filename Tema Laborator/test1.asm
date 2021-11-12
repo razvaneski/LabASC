@@ -37,6 +37,8 @@ main:
 	popl %ebx
 	popl %ebx
 
+	pushl nr
+
 et_loop:
 	pushl $chDelim
 	pushl $0
@@ -64,6 +66,8 @@ et_loop:
 	call printf
 	popl %ebx
 	popl %ebx
+
+	pushl nr
 
 	jmp et_loop
 
