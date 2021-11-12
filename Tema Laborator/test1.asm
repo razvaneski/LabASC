@@ -65,7 +65,7 @@ operator:
 	je et_mul
 
 	movl d, %ebx
-	cmp %eax, %%ebx
+	cmp %eax, %ebx
 	je et_div
 
 	jmp et_loop
