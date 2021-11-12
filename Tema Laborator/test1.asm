@@ -8,6 +8,7 @@
 
 	x: .space 4
 	y: .space 4
+	rezultat: .space 4
 
 	a: .asciz "add"
 	s: .asciz "sub"
@@ -71,9 +72,9 @@ et_loop:
 
 exit:
 	popl %ebx
-	movl %ebx, nr
+	movl %ebx, rezultat
 
-	pushl nr
+	pushl rezultat
 	pushl $formatPrintfNr
 	call printf
 	popl %ebx
