@@ -11,7 +11,7 @@ main:
 	movl s1, %eax
 	movl s2, %ebx
 
-	cmp %eax, %ebx
+	cmp s2, %eax
 	jne exit
 
 	pushl $da
