@@ -37,29 +37,18 @@ main:
 	je operator
 
 	pushl nr
+	pushl $formatPrintfNr
+	call printf
+	popl %ebx
+	popl %ebx
+
+	pushl nr
 
 operator:
 	popl %ebx
 	movl %ebx, x
 	popl %ebx
 	movl %ebx, y
-
-
-	pushl x
-	pushl $formatPrintfNr
-	call printf
-	popl %ebx
-	popl %ebx
-
-
-
-	pushl y
-	pushl $formatPrintfNr
-	call printf
-	popl %ebx
-	popl %ebx
-
-
 
 	movl nr, %eax
 
@@ -124,6 +113,12 @@ et_loop:
 	je operator
 
 	pushl nr
+	pushl $formatPrintfNr
+	call printf
+	popl %ebx
+	popl %ebx
+
+	pushl nr
 
 	jmp et_loop
 
@@ -136,7 +131,7 @@ exit:
 	call printf
 	popl %ebx
 	popl %ebx
-
+	
 	mov $1, %eax
 	xorl %ebx, %ebx
 	int $0x80
