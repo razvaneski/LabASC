@@ -43,7 +43,13 @@ et_loop:
 	je exit
 
 	pushl res
-	pushl $formatPrintf
+	call atoi
+	popl %ebx
+
+	mov %eax, nr
+
+	pushl nr
+	pushl $formatPrintfNr
 	call printf
 	popl %ebx
 	popl %ebx
