@@ -1,8 +1,6 @@
 .data
-	formatScanf: .asciz "%s"
-
 	chDelim: .asciz " "
-	str: .space 100 # VERIFICA DIMENSIUNEA
+	str: .asciz "2 10 mul 5 add 7 6 mul sub"
 	res: .space 4
 	nr: .space 4
 	formatPrintf: .asciz "%s\n"
@@ -12,22 +10,16 @@
 	y: .space 4
 	rezultat: .space 4
 
-	a: .asciz "a"
-	s: .asciz "s"
-	m: .asciz "m"
-	d: .asciz "d"
+	a: .asciz "add"
+	s: .asciz "sub"
+	m: .asciz "mul"
+	d: .asciz "div"
 
 .text
 
 .global main
 
 main:
-	pushl $str
-	pushl $formatScanf
-	call scanf
-	popl %ebx
-	popl %ebx
-
 	pushl $chDelim
 	pushl $str
 	call strtok
@@ -43,10 +35,31 @@ main:
 	movl %eax, nr
 
 	cmp $0, nr
-	je et_loop
+	je et_operator
 
 	pushl nr
 	jmp et_loop
+
+et_add:
+	pushl res
+	pushl $formatPrintf
+	call printf
+	popl %ebx
+	popl %ebx
+
+	popl %ebx
+	movl %ebx, x
+	popl %ebx
+	add x, %ebx
+	pushl %ebx
+	
+	je et_loop
+
+et_operator:
+	movl res, %ebx
+	cmp a, %ebx
+	je et_add
+
 
 et_loop:
 	pushl $chDelim
@@ -67,15 +80,23 @@ et_loop:
 
 	movl %eax, nr
 
+	cmp $0, nr
+	je et_operator
+
 	pushl nr
+
+	jmp et_loop
+
+exit:
+	popl %ebx
+	movl %ebx, rezultat
+
+	pushl rezultat
 	pushl $formatPrintfNr
 	call printf
 	popl %ebx
 	popl %ebx
 
-	jmp et_loop
-
-exit:
 	mov $1, %eax
 	xorl %ebx, %ebx
 	int $0x80
