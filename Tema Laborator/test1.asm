@@ -35,7 +35,8 @@ et_loop:
 	je exit
 
 	movl %eax, res
-	cmp $multiplu, $res
+	movl $multiplu, %ebx
+	cmp %eax, %ebx
 	je printt
 
 	jmp et_loop
