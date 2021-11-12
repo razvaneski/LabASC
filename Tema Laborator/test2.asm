@@ -4,7 +4,7 @@
 	da: .asciz "da\n"
 	x: .space 4
 	m: .long 109
-	formatPrintf: .asciz "%c\n"
+	formatPrintf: .asciz "%d\n"
 .text
 .global main
 
