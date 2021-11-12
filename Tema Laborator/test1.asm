@@ -40,9 +40,18 @@ main:
 	pushl nr
 
 et_operator:
-	movl nr, %eax
-	cmp a, %eax
-	je exit
+	movl res, %ebx
+	cmp a, %ebx
+	je et_add
+
+et_add:
+	popl %ebx
+	popl %eax
+
+	add %ebx, %eax
+	pushl %eax
+	je et_loop
+
 
 et_loop:
 	pushl $chDelim
