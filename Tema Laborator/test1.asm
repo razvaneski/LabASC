@@ -5,6 +5,7 @@
 	nr: .space 4
 	formatPrintf: .asciz "%s\n"
 	formatPrintfNr: .asciz "%d\n"
+	formatPrintfCh: .asciz "%c\n"
 
 	x: .space 4
 	y: .space 4
@@ -40,7 +41,7 @@ main:
 	pushl nr
 	jmp et_loop
 
-et_add:
+et_mul:
 	pushl res
 	pushl $formatPrintf
 	call printf
@@ -59,10 +60,18 @@ et_operator:
 	movl $res, %edi
 	xorl %ecx, %ecx
 	movb (%edi, %ecx, 1), %al
+	movl (%edi, %ecx, 1), %ebx
 
+
+	pushl %ebx
+	pushl $formatPrintfCh
+	popl %ebx
+	popl %ebx
+	
 	cmp $109, %al
-	je et_add
+	je et_mul
 
+	jmp exit
 
 et_loop:
 	pushl $chDelim
