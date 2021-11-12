@@ -30,14 +30,14 @@ et_loop:
 
 	movl %eax, res
 
+	cmp $0, res
+	je exit
+
 	pushl $res
 	call atoi
 	popl %ebx
 
 	movl %eax, res
-	
-	cmp $0, res
-	je exit
 
 	pushl res
 	pushl $formatPrintf
