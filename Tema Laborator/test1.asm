@@ -17,6 +17,8 @@ main:
 	popl %ebx
 	popl %ebx
 
+	xorl $1, %eax
+
 	pushl %eax
 	pushl $formatPrintf
 	call printf
