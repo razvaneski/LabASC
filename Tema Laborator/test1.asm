@@ -63,8 +63,8 @@ et_operator:
 	movl (%edi, %ecx, 1), %eax
 	popl %ecx
 
-	cmp $61, %eax
-	jne et_loop
+	# cmp $61, %eax
+	# jne et_loop
 
 	pushl %eax
 	pushl $formatPrintf
