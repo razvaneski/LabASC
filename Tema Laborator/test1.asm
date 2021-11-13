@@ -47,15 +47,15 @@ main:
 	cmp $0, nr # daca nu e numar, inseamna ca e operator
 	je et_operator
 
-	pushl nr
-	pushl $formatPrintfNr
-	call printf
-	popl %ebx
-	popl %ebx
-
 	jmp et_loop
 
 et_operator:
+	pushl res
+	pushl $formatPrintf
+	call printf
+	popl %ebx
+	popl %ebx 
+	
 	movl res, %edi
 
 	pushl %ecx
@@ -92,12 +92,6 @@ et_loop:
 
 	cmp $0, nr
 	je et_operator
-
-	pushl nr
-	pushl $formatPrintfNr
-	call printf
-	popl %ebx
-	popl %ebx
 
 	jmp et_loop
 
