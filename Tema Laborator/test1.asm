@@ -1,4 +1,6 @@
 .data
+	formatScanf: .asciz "%[^\n]s"
+
 	chDelim: .asciz " "
 	str: .space 1000
 	res: .space 4
@@ -21,7 +23,9 @@
 
 main:
 	pushl $str
-	call gets
+	pushl $formatScanf
+	call scanf
+	popl %ebx
 	popl %ebx
 
 	pushl $chDelim
