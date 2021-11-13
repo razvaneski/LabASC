@@ -59,7 +59,6 @@ et_operator:
 	movl res, %edi
 
 	movb (%edi, %ecx, 1), %al
-	popl %ecx
 
 	cmp $61, %al
 	je et_loop
