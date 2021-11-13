@@ -17,8 +17,8 @@ main:
 	popl %ebx
 	popl %ebx
 
-	pushl $s1
 	pushl $chDelim
+	pushl $s1
 	call strtok
 	popl %ebx
 	popl %ebx
