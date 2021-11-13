@@ -58,8 +58,6 @@ main:
 et_operator:
 	movl res, %edi
 
-	pushl %ecx
-	xorl %ecx, %ecx
 	movb (%edi, %ecx, 1), %al
 	popl %ecx
 
