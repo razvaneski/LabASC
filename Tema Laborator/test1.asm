@@ -56,17 +56,17 @@ main:
 	jmp et_loop
 
 et_operator:
-	movl $res, %edi
+	movl res, %edi
 
 	pushl %ecx
 	xorl %ecx, %ecx
-	movl (%edi, %ecx, 1), %eax
+	movb (%edi, %ecx, 1), %al
 	popl %ecx
 
-	# cmp $61, %eax
-	# jne et_loop
+	cmp $61, %al
+	jne et_loop
 
-	pushl %eax
+	pushl res
 	pushl $formatPrintf
 	call printf
 	popl %ebx
