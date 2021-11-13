@@ -12,7 +12,7 @@ main:
 	#subl $97, %eax
 	movl %eax, x
 
-	pushl x
+	pushl $x
 	pushl $formatPrintf
 	call printf
 	popl %ebx
