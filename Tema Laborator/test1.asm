@@ -1,6 +1,6 @@
 .data
 	s: .asciz "01001"
-	formatPrintf: .asciz "%s\n"
+	formatPrintf: .asciz "%d\n"
 	x: .space 4
 	doi: .long 2
 	y: .space 4
