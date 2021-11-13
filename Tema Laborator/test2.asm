@@ -33,7 +33,7 @@ main:
 
 	movl %eax, res
 
-	movl $res, %edi
+	movl res, %edi
 	movb (%edi, %ecx, 1), %al
 
 	cmp $109, %al
