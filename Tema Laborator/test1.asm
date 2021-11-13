@@ -14,10 +14,10 @@
 	y: .space 4
 	rezultat: .space 4
 
-	a: .asciz "add"
-	s: .asciz "sub"
-	m: .asciz "mul"
-	d: .asciz "div"
+	a: .asciz "a"
+	s: .asciz "s"
+	m: .asciz "m"
+	d: .asciz "d"
 
 .text
 
@@ -49,13 +49,13 @@ main:
 
 	jmp et_loop
 
-et_operator:
+et_operator: # nu-mi vede prima litera
 	pushl res
 	pushl $formatPrintf
 	call printf
 	popl %ebx
 	popl %ebx 
-	
+
 	movl res, %edi
 
 	pushl %ecx
@@ -63,10 +63,14 @@ et_operator:
 	movb (%edi, %ecx, 1), %al
 	popl %ecx
 
-	cmp $61, %al
-	jne et_loop
+	cmp $61, %al # compara cu a - crapa
+	jne et_loop 
 
-	
+	pushl a
+	pushl $formatPrintf
+	call printf
+	popl %ebx
+	popl %ebx
 
 	jmp et_loop
 
