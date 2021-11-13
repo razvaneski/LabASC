@@ -66,7 +66,8 @@ et_operator:
 	cmp $61, %al
 	jne et_loop
 
-	push %al
+	movl %al, %eax
+	pushl %eax
 	pushl $formatPrintf
 	call printf
 	popl %ebx
