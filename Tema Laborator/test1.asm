@@ -50,14 +50,13 @@ main:
 	jmp et_loop
 
 et_operator: # nu-mi vede prima litera
-	pushl $a
+	pushl res
 	pushl $formatPrintf
 	call printf
 	popl %ebx
 	popl %ebx 
 
 	movl res, %edi
-
 	pushl %ecx
 	xorl %ecx, %ecx
 	movb (%edi, %ecx, 1), %al
@@ -66,7 +65,7 @@ et_operator: # nu-mi vede prima litera
 	cmp $61, %al # compara cu a - crapa
 	jne et_loop 
 
-	pushl a
+	pushl $a
 	pushl $formatPrintf
 	call printf
 	popl %ebx
