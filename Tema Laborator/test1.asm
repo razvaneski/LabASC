@@ -1,6 +1,6 @@
 .data
 	c: .asciz "a"
-	formatPrintf: "%d\n"
+	formatPrintf: .asciz "%d\n"
 	x: .space 4
 .text
 
