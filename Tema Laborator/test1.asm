@@ -11,6 +11,7 @@ main:
 	call int
 	popl %ebx
 
+	sub $97, %eax
 	movl %eax, x
 
 	pushl x
