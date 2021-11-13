@@ -7,7 +7,7 @@
 .global main
 
 main:
-	movl c, %eax
+	movl $c, %eax
 
 	subl $97, %eax
 	movl %eax, x
