@@ -1,22 +1,23 @@
 .data
-	c: .asciz "b"
+	s: .asciz "01001"
 	formatPrintf: .asciz "%s\n"
 	x: .space 4
+	doi: .long 2
 	y: .space 4
 .text
 
 .global main
 
 main:
-	movl c, %eax
+	pushl $2
+	pushl $doi
+	pushl $s
+	call strtol
+	popl %ebx
+	popl %ebx
+	popl %ebx
 
-	subl $97, %eax
-	movl %eax, x
-
-	cmp $0, %eax
-	je exit
-
-	pushl $x
+	pushl %eax
 	pushl $formatPrintf
 	call printf
 	popl %ebx
