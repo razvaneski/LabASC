@@ -33,8 +33,6 @@ main:
 
 	movl %eax, res
 
-	xorl %ecx, %ecx
-
 	movl $res, %edi
 	movb (%edi, %ecx, 1), %al
 
