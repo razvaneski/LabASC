@@ -2,6 +2,7 @@
 	c: .asciz "a"
 	formatPrintf: .asciz "%s\n"
 	x: .space 4
+	y: .space 4
 .text
 
 .global main
@@ -11,8 +12,10 @@ main:
 
 	subl $97, %eax
 	movl %eax, x
+	movl $x, %eax
+	movl %eax, y
 
-	pushl $x
+	pushl $y
 	pushl $formatPrintf
 	call printf
 	popl %ebx
