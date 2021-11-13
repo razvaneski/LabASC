@@ -1,6 +1,6 @@
 .data
 	c: .asciz "a"
-	formatPrintf: .asciz "%d\n"
+	formatPrintf: .asciz "%s\n"
 	x: .space 4
 .text
 
@@ -9,7 +9,7 @@
 main:
 	movl c, %eax
 
-	#subl $97, %eax
+	subl $97, %eax
 	movl %eax, x
 
 	pushl $x
