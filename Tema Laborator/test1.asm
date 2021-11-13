@@ -45,7 +45,7 @@ main:
 	movl %eax, nr
 
 	cmp $0, nr # daca nu e numar, inseamna ca e operator
-	je et_loop
+	je et_operator
 
 	pushl nr
 	pushl $formatPrintfNr
@@ -86,7 +86,7 @@ et_loop:
 	movl %eax, nr
 
 	cmp $0, nr
-	je et_loop
+	je et_operator
 
 	pushl nr
 	pushl $formatPrintfNr
