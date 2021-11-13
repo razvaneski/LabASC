@@ -82,15 +82,6 @@ et_loop:
 	jmp et_loop
 
 exit:
-	popl %ebx
-	movl %ebx, rezultat
-
-	pushl rezultat
-	pushl $formatPrintfNr
-	call printf
-	popl %ebx
-	popl %ebx
-
 	mov $1, %eax
 	xorl %ebx, %ebx
 	int $0x80
