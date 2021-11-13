@@ -1,13 +1,10 @@
 .data
-	formatScanf: .asciz "%s"
-
 	chDelim: .asciz " "
-	str: .space 1000
+	str: .asciz "2 10 mul 5 add 7 6 mul sub"
 	res: .space 4
 	nr: .space 4
 	formatPrintf: .asciz "%s\n"
 	formatPrintfNr: .asciz "%d\n"
-	formatPrintfCh: .asciz "%c\n"
 
 	x: .space 4
 	y: .space 4
@@ -18,24 +15,88 @@
 	m: .asciz "mul"
 	d: .asciz "div"
 
-	aux: .space 4
-
 .text
 
 .global main
 
 main:
+	pushl $chDelim
 	pushl $str
-	call gets
+	call strtok
+	popl %ebx
 	popl %ebx
 
-	pushl $str
+	movl %eax, res
+
+	pushl res
+	call atoi
+	popl %ebx
+
+	movl %eax, nr
+
+	cmp $0, nr
+	je et_operator
+
+	pushl nr
+	jmp et_loop
+
+et_add:
+	pushl res
 	pushl $formatPrintf
 	call printf
 	popl %ebx
 	popl %ebx
 
+	popl %ebx
+	movl %ebx, x
+	popl %ebx
+	add x, %ebx
+	pushl %ebx
+	
+	je et_loop
+
+et_operator:
+	movl res, %ebx
+	cmp a, %ebx
+	je et_add
+
+
+et_loop:
+	pushl $chDelim
+	pushl $0
+	call strtok
+	popl %ebx
+	popl %ebx
+
+	movl %eax, res
+
+	cmp $0, res
+	je exit
+
+
+	pushl res
+	call atoi
+	popl %ebx
+
+	movl %eax, nr
+
+	cmp $0, nr
+	je et_operator
+
+	pushl nr
+
+	jmp et_loop
+
 exit:
+	popl %ebx
+	movl %ebx, rezultat
+
+	pushl rezultat
+	pushl $formatPrintfNr
+	call printf
+	popl %ebx
+	popl %ebx
+
 	mov $1, %eax
 	xorl %ebx, %ebx
 	int $0x80
