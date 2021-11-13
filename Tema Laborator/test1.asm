@@ -26,9 +26,7 @@
 
 main:
 	pushl $str
-	pushl $formatScanf
-	call scanf
-	popl %ebx
+	call gets
 	popl %ebx
 
 	pushl $str
@@ -37,18 +35,6 @@ main:
 	popl %ebx
 	popl %ebx
 
-	pushl $str
-	pushl $formatScanf
-	call scanf
-	popl %ebx
-	popl %ebx
-
-	pushl $str
-	pushl $formatPrintf
-	call printf
-	popl %ebx
-	popl %ebx
-	
 exit:
 	mov $1, %eax
 	xorl %ebx, %ebx
