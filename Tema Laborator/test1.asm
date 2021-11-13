@@ -17,7 +17,7 @@ main:
 	popl %ebx
 	popl %ebx
 
-	xorl $1, %eax
+	xorl $4, %eax
 
 	pushl %eax
 	pushl $formatPrintf
