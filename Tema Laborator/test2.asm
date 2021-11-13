@@ -4,7 +4,7 @@
 	x: .space 4
 	y: .space 4
 	m: .asciz "nu e m\n"
-	formatPrintf: .asciz "%c\n"
+	formatPrintf: .asciz "%s\n"
 .text
 .global main
 
@@ -23,7 +23,7 @@ main:
 	cmp $109, %al
 	je exit
 
-	pushl m
+	pushl $m
 	pushl $formatPrintf
 	call printf
 	popl %ebx
