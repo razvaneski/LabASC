@@ -1,6 +1,6 @@
 .data
 	chDelim: .asciz " "
-	str: .asciz "2 10 mul 5 add 7 6 mul sub"
+	str: .space 1000
 	res: .space 4
 	nr: .space 4
 	formatPrintf: .asciz "%s\n"
@@ -20,6 +20,10 @@
 .global main
 
 main:
+	pushl $str
+	call gets
+	popl %ebx
+
 	pushl $chDelim
 	pushl $str
 	call strtok
