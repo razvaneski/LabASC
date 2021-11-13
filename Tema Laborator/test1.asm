@@ -10,7 +10,7 @@
 
 main:
 	pushl $2
-	pushl $doi
+	pushl $0
 	pushl $s
 	call strtol
 	popl %ebx
