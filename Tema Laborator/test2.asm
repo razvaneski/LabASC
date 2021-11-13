@@ -18,7 +18,7 @@ main:
 	xorl %ecx, %ecx
 
 	movl $s1, %edi
-	movb (%edi, %ecx, 4), %eax
+	movl (%edi, %ecx, 4), %eax
 
 	cmp $109, %eax
 	je exit
