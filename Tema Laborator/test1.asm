@@ -7,12 +7,12 @@
 .global main
 
 main:
-	movl $c, %eax
+	movl c, %eax
 
-	subl $97, %eax
+	#subl $97, %eax
 	movl %eax, x
 
-	pushl $x
+	pushl x
 	pushl $formatPrintf
 	call printf
 	popl %ebx
