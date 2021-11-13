@@ -41,7 +41,7 @@ main:
 	cmp $109, %al
 	je exit
 
-	pushl $m
+	pushl $res
 	pushl $formatPrintf
 	call printf
 	popl %ebx
