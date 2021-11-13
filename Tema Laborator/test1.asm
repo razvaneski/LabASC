@@ -7,11 +7,9 @@
 .global main
 
 main:
-	pushl $c
-	call int
-	popl %ebx
+	movl c, %eax
 
-	sub $97, %eax
+	subl $97, %eax
 	movl %eax, x
 
 	pushl x
