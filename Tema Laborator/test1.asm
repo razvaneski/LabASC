@@ -1,3 +1,5 @@
+# 2 10 mul 5 div 7 6 sub add
+
 .data
 	formatScanf: .asciz "%[^\n]s"
 
@@ -42,7 +44,8 @@ main:
 
 	movl %eax, nr
 
-	pushl nr
+	cmp $0, nr
+	je et_loop
 
 	pushl nr
 	pushl $formatPrintfNr
@@ -71,7 +74,8 @@ et_loop:
 
 	movl %eax, nr
 
-	pushl nr
+	cmp $0, nr
+	je et_loop
 
 	pushl nr
 	pushl $formatPrintfNr
