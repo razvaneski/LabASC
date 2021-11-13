@@ -1,5 +1,5 @@
 .data
-	c: .asciz "a"
+	c: .asciz "b"
 	formatPrintf: .asciz "%s\n"
 	x: .space 4
 	y: .space 4
