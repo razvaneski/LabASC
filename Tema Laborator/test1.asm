@@ -1,4 +1,4 @@
-# 2 10 mul 5 div 7 6 sub add
+# 2 10 add 5 add 7 6 add add
 
 .data
 	formatScanf: .asciz "%[^\n]s"
@@ -24,13 +24,13 @@
 .global main
 
 main:
-	pushl $str
+	pushl $str # citesc expresia
 	pushl $formatScanf
 	call scanf
 	popl %ebx
 	popl %ebx
 
-	pushl $chDelim
+	pushl $chDelim # ii aplic strtok
 	pushl $str
 	call strtok
 	popl %ebx
@@ -38,13 +38,13 @@ main:
 
 	movl %eax, res
 
-	pushl res
+	pushl res # transform rezultatul in numar
 	call atoi
 	popl %ebx
 
 	movl %eax, nr
 
-	cmp $0, nr
+	cmp $0, nr # daca nu e numar, inseamna ca e operator
 	je et_loop
 
 	pushl nr
@@ -54,6 +54,17 @@ main:
 	popl %ebx
 
 	jmp et_loop
+
+et_operator:
+	pushl res
+	pushl $formatPrintf
+	call printf
+	popl %ebx
+	popl %ebx
+
+	jmp et_loop
+	
+
 
 et_loop:
 	pushl $chDelim
