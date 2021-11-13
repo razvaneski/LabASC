@@ -15,7 +15,7 @@ main:
 	popl %ebx
 	popl %ebx
 
-	pushl s1
+	pushl $s1
 	pushl $formatPrintf
 	call printf
 	popl %ebx
