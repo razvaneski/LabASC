@@ -50,7 +50,7 @@ main:
 	jmp et_loop
 
 et_operator: # nu-mi vede prima litera
-	pushl a
+	pushl $a
 	pushl $formatPrintf
 	call printf
 	popl %ebx
