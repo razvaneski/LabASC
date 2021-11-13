@@ -60,13 +60,12 @@ et_operator:
 
 	pushl %ecx
 	xorl %ecx, %ecx
-	movb (%edi, %ecx, 1), %al
+	movl (%edi, %ecx, 1), %eax
 	popl %ecx
 
-	cmp $61, %al
+	cmp $61, %eax
 	jne et_loop
 
-	mov %al, %eax
 	pushl %eax
 	pushl $formatPrintf
 	call printf
