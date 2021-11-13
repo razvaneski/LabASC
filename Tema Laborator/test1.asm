@@ -58,16 +58,21 @@ main:
 et_operator:
 	movl res, %edi
 
+	pushl %ecx
+	xorl %ecx, %ecx
 	movb (%edi, %ecx, 1), %al
+	popl %ecx
 
 	cmp $61, %al
-	je et_loop
+	jne et_loop
 
-	pushl res
+	pushl %eax
 	pushl $formatPrintf
 	call printf
 	popl %ebx
 	popl %ebx
+
+	jmp et_loop
 
 
 et_loop:
@@ -91,13 +96,7 @@ et_loop:
 
 	cmp $0, nr
 	je et_operator
-
-	pushl nr
-	pushl $formatPrintfNr
-	call printf
-	popl %ebx
-	popl %ebx
-
+	
 	jmp et_loop
 
 exit:
