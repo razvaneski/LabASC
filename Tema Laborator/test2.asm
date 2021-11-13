@@ -7,6 +7,7 @@
 	y: .space 4
 	m: .asciz "nu e m\n"
 	formatPrintf: .asciz "%s\n"
+	
 .text
 .global main
 
