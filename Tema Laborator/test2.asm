@@ -3,7 +3,7 @@
 	formatScanf: .asciz "%[^\n]s"
 	x: .space 4
 	y: .space 4
-	m: .asciz "nu e m"
+	m: .asciz "nu e m\n"
 	formatPrintf: .asciz "%c\n"
 .text
 .global main
