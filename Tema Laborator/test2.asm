@@ -1,5 +1,5 @@
 .data
-	s1: .asciz "mul"
+	s1: .space 10
 	formatScanf: .asciz "%s"
 	x: .space 4
 	y: .space 4
@@ -9,6 +9,11 @@
 .global main
 
 main:
+	pushl $s1
+	pushl $formatScanf
+	call scanf
+	popl %ebx
+	popl %ebx
 
 	xorl %ecx, %ecx
 
