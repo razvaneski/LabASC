@@ -1,5 +1,7 @@
 .data
 	s1: .space 10
+	res: .space 10
+	chDelim: .asciz " "
 	formatScanf: .asciz "%[^\n]s"
 	x: .space 4
 	y: .space 4
@@ -15,9 +17,25 @@ main:
 	popl %ebx
 	popl %ebx
 
+	pushl $s1
+	pushl $chDelim
+	call strtok
+	popl %ebx
+	popl %ebx
+
+	movl %eax, res
+
+	pushl $chDelim
+	pushl $0
+	call strtok
+	popl %ebx
+	popl %ebx
+
+	movl %eax, res
+
 	xorl %ecx, %ecx
 
-	movl $s1, %edi
+	movl $res, %edi
 	movb (%edi, %ecx, 1), %al
 
 	cmp $109, %al
