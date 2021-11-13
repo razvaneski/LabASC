@@ -1,5 +1,5 @@
 .data
-	s: .asciz "01001"
+	s: .asciz "01101"
 	formatPrintf: .asciz "%d\n"
 	x: .space 4
 	doi: .long 2
