@@ -46,11 +46,14 @@ et_operator:
 	cmp $97, %al
 	je et_add
 	
-	pushl res
-	pushl $formatPrintfS
-	call printf
-	popl %ebx
-	popl %ebx
+	cmp $115, %al
+	je et_sub
+	
+	cmp $109, %al
+	je et_mul
+	
+	cmp $100, %al
+	je et_div
 	
 	jmp et_loop
 
@@ -58,8 +61,41 @@ et_add:
 	popl %ebx
 	movl %ebx, aux
 	popl %ebx
-	add %ebx, aux
+	addl %ebx, aux
 	pushl aux
+	
+	jmp et_loop
+
+et_sub: 
+	popl %ebx
+	movl %ebx, aux
+	popl %ebx
+	sub aux, %ebx
+	movl %ebx, aux
+	pushl aux
+	
+	jmp et_loop
+	
+et_mul:
+	popl %ebx
+	popl %eax
+	xorl %edx, %edx
+	
+	mul %ebx
+	movl %eax, aux
+	pushl aux
+	
+	jmp et_loop
+	
+et_div:
+	popl %ebx
+	popl %eax
+	xorl %edx, %edx
+	
+	div %ebx
+	movl %eax, aux
+	pushl aux
+	
 	jmp et_loop
 
 et_loop:
