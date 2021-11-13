@@ -1,34 +1,19 @@
 .data
-	s1: .space 1000
-	s2: .space 1000
-
-	formatPrintf: .asciz "%s\n"
-	formatScanf: .asciz "%s"
-
+	c: .asciz "a"
+	formatPrintf: "%d\n"
+	x: .space 4
 .text
 
 .global main
 
 main:
-	pushl $s1
-	pushl $formatScanf
-	call scanf
-	popl %ebx
+	pushl $c
+	call int
 	popl %ebx
 
-	pushl $s2
-	pushl $formatScanf
-	call scanf
-	popl %ebx
-	popl %ebx
+	movl %eax, x
 
-	pushl $s2
-	pushl $s1
-	call strcat
-	popl %ebx
-	popl %ebx
-
-	pushl $s1
+	pushl x
 	pushl $formatPrintf
 	call printf
 	popl %ebx
