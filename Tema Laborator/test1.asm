@@ -13,7 +13,7 @@ main:
 	subl $97, %eax
 	movl %eax, x
 
-	cmp $0, x
+	cmp $0, $x
 	je exit
 
 	pushl $x
