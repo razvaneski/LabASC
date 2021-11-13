@@ -1,6 +1,6 @@
 .data
 	c: .asciz "a"
-	formatPrintf: .asciz "%d\n"
+	formatPrintf: .asciz "%s\n"
 	x: .space 4
 	y: .space 4
 .text
@@ -12,10 +12,11 @@ main:
 
 	subl $97, %eax
 	movl %eax, x
-	movl $x, %eax
-	movl %eax, y
 
-	pushl $y
+	cmp $0, x
+	je exit
+
+	pushl $x
 	pushl $formatPrintf
 	call printf
 	popl %ebx
