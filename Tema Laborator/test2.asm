@@ -1,9 +1,9 @@
 .data
 	s1: .space 10
-	formatScanf: .asciz "%s"
+	formatScanf: .asciz "%[^\n]s"
 	x: .space 4
 	y: .space 4
-	m: .asciz "m"
+	m: .asciz "nu e m"
 	formatPrintf: .asciz "%c\n"
 .text
 .global main
