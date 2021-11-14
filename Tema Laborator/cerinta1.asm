@@ -34,7 +34,279 @@ main:
 	popl %ebx
 
 	xorl %ecx, %ecx
-	movl s16, %edi
+	movl $s16, %edi
 
-et_loop:
+et_transf:
+	movb (%edi, %ecx, 1), %al
+	cmp $0, %al
+	je exit
+
+	incl %ecx
+
+	cmp $48, %al
+	je et_0
+
+	cmp $49, %al
+	je et_1
+
+	cmp $50, %al
+	je et_2
+
+	cmp $51, %al
+	je et_3
+
+	cmp $52, %al
+	je et_4
+
+	cmp $53, %al
+	je et_5
+
+	cmp $54, %al
+	je et_6
+
+	cmp $55, %al
+	je et_7
+
+	cmp $56, %al
+	je et_8
+
+	cmp $57, %al
+	je et_9
+
+	cmp $65, %al
+	je et_A
+
+	cmp $66, %al
+	je et_B
+
+	cmp $67, %al
+	je et_C
+
+	cmp $68, %al
+	je et_D
+
+	cmp $69, %al
+	je et_E
+
+	cmp $70, %al
+	je et_F
+
+et_0:
+	pushl %ecx
+
+	pushl $val0
+	pushl $s2
+	call strcat
+	popl %ebx
+	popl %ebx
+
+	popl %ecx
+
+	jmp et_transf
+
+et_1:
+	pushl %ecx
+
+	pushl $val1
+	pushl $s2
+	call strcat
+	popl %ebx
+	popl %ebx
+
+	popl %ecx
+
+	jmp et_transf
+
+et_2:
+	pushl %ecx
+
+	pushl $val2
+	pushl $s2
+	call strcat
+	popl %ebx
+	popl %ebx
+
+	popl %ecx
+
+	jmp et_transf
+
+et_3:
+	pushl %ecx
+
+	pushl $val3
+	pushl $s2
+	call strcat
+	popl %ebx
+	popl %ebx
+
+	popl %ecx
+
+	jmp et_transf
+
+et_4:
+	pushl %ecx
+
+	pushl $val4
+	pushl $s2
+	call strcat
+	popl %ebx
+	popl %ebx
+
+	popl %ecx
+
+	jmp et_transf
+
+et_5:
+	pushl %ecx
+
+	pushl $val5
+	pushl $s2
+	call strcat
+	popl %ebx
+	popl %ebx
+
+	popl %ecx
+
+	jmp et_transf
+
+et_6:
+	pushl %ecx
+
+	pushl $val6
+	pushl $s2
+	call strcat
+	popl %ebx
+	popl %ebx
+
+	popl %ecx
+
+	jmp et_transf
+
+et_7:
+	pushl %ecx
+
+	pushl $val7
+	pushl $s2
+	call strcat
+	popl %ebx
+	popl %ebx
+
+	popl %ecx
+
+	jmp et_transf
+
+et_8:
+	pushl %ecx
+
+	pushl $val8
+	pushl $s2
+	call strcat
+	popl %ebx
+	popl %ebx
+
+	popl %ecx
+
+	jmp et_transf
+
+et_9:
+	pushl %ecx
+
+	pushl $val9
+	pushl $s2
+	call strcat
+	popl %ebx
+	popl %ebx
+
+	popl %ecx
+
+	jmp et_transf
+
+et_A:
+	pushl %ecx
+
+	pushl $valA
+	pushl $s2
+	call strcat
+	popl %ebx
+	popl %ebx
+
+	popl %ecx
+
+	jmp et_transf
+
+et_B:
+	pushl %ecx
+
+	pushl $valB
+	pushl $s2
+	call strcat
+	popl %ebx
+	popl %ebx
+
+	popl %ecx
+
+	jmp et_transf
+
+et_C:
+	pushl %ecx
+
+	pushl $valC
+	pushl $s2
+	call strcat
+	popl %ebx
+	popl %ebx
+
+	popl %ecx
+
+	jmp et_transf
+
+et_D:
+	pushl %ecx
+
+	pushl $valD
+	pushl $s2
+	call strcat
+	popl %ebx
+	popl %ebx
+
+	popl %ecx
+
+	jmp et_transf
+
+et_E:
+	pushl %ecx
+
+	pushl $valE
+	pushl $s2
+	call strcat
+	popl %ebx
+	popl %ebx
+
+	popl %ecx
+
+	jmp et_transf
+
+et_F:
+	pushl %ecx
+
+	pushl $valF
+	pushl $s2
+	call strcat
+	popl %ebx
+	popl %ebx
+
+	popl %ecx
+
+	jmp et_transf
+
+exit:
+	pushl $s2
+	pushl $formatPrintf
+	call printf
+	popl %ebx
+	popl %ebx
+
+	movl $1, %eax
+	xorl %ebx, %ebx
+	int $0x80
 	

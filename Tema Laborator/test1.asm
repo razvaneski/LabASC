@@ -1,23 +1,32 @@
 .data
-	s: .asciz "01101"
-	formatPrintf: .asciz "%d\n"
-	x: .space 4
-	doi: .long 2
-	y: .space 4
+	s1: .space 100
+	s2: .space 100
+	formatPrintf: .asciz "%s\n"
+	formatScanf: .asciz "%s"
 .text
 
 .global main
 
 main:
-	pushl $2
-	pushl $0
-	pushl $s
-	call strtol
-	popl %ebx
+	pushl $s1
+	pushl $formatScanf
+	call scanf
 	popl %ebx
 	popl %ebx
 
-	pushl %eax
+	pushl $s2
+	pushl $formatScanf
+	call scanf
+	popl %ebx
+	popl %ebx
+
+	pushl $s2
+	pushl $s1
+	call strcat
+	popl %ebx
+	popl %ebx
+
+	pushl $s1
 	pushl $formatPrintf
 	call printf
 	popl %ebx
