@@ -4,6 +4,7 @@
 
 	s16: .space 1000
 	s2: .space 1000
+	curr: .space 4
 
 	val0: .asciz "0000"
 	val1: .asciz "0001"
@@ -36,10 +37,12 @@ main:
 	xorl %ecx, %ecx
 	movl $s16, %edi
 
+	jmp et_transf
+
 et_transf:
 	movb (%edi, %ecx, 1), %al
 	cmp $0, %al
-	je exit
+	je et_cont
 
 	incl %ecx
 
@@ -298,6 +301,20 @@ et_F:
 	popl %ecx
 
 	jmp et_transf
+
+et_cont:
+	movl $0, curr
+	movl $s2, %edi
+
+et_parcurgere:
+	movl curr, %ecx
+	movb (%edi, %ecx, 1), %al
+	cmp $0, %al
+	je exit
+
+	addl $12, curr
+	jmp et_parcurgere
+
 
 exit:
 	pushl $s2
