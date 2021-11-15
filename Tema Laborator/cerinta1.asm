@@ -23,6 +23,8 @@
 	valE: .asciz "1110" #14
 	valF: .asciz "1111" #15
 
+	text_div: .asciz "div "
+
 .text
 
 .global main
@@ -312,9 +314,49 @@ et_parcurgere:
 	cmp $0, %al
 	je exit
 
+	addl $2, %ecx
+	movb (%edi, %ecx, 1), %al
+
+	cmp $49, %al
+	je et_variabila
+
+	movl curr, %ecx
+	addl $1, %ecx
+	movb (%edi, %ecx, 1), %al
+
+	cmp $49, %al
+	je et_operatie
+
+	cmp $48, %al
+	je et_intreg
+
+	jmp et_parcurgere
+
+et_variabila:
 	addl $12, curr
 	jmp et_parcurgere
 
+et_operatie:
+	movl curr, %ecx
+	addl $9, %ecx
+
+	movb (%edi, %ecx, 1), %al
+	cmp $48, %al
+	je et_div
+
+et_div:
+	pushl $text_div
+	pushl $formatPrintf
+	call printf
+	popl %ebx
+	popl %ebx
+
+	addl $12, curr
+	jmp et_parcurgere
+
+et_intreg:
+	addl $12, curr
+	jmp et_parcurgere
 
 exit:
 	pushl $s2
