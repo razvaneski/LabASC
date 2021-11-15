@@ -2,10 +2,14 @@
 	formatScanf: .asciz "%s"
 	formatPrintf: .asciz "%s\n"
 	formatPrintfLinie: .asciz "%s"
+	formatPrintfNr: .asciz "%d "
+	endl: .asciz ""
 
 	s16: .space 1000
 	s2: .space 1000
 	curr: .space 4
+	prod: .space 4
+	nr: .space 4
 
 	val0: .asciz "0000"
 	val1: .asciz "0001"
@@ -29,6 +33,33 @@
 	text_add: .asciz "add "
 	text_sub: .asciz "sub "
 	text_mul: .asciz "mul "
+
+	text_a: .asciz "a "
+	text_b: .asciz "b "
+	text_c: .asciz "c "
+	text_d: .asciz "d "
+	text_e: .asciz "e "
+	text_f: .asciz "f "
+	text_g: .asciz "g "
+	text_h: .asciz "h "
+	text_i: .asciz "i "
+	text_j: .asciz "j "
+	text_k: .asciz "k "
+	text_l: .asciz "l "
+	text_m: .asciz "m "
+	text_n: .asciz "n "
+	text_o: .asciz "o "
+	text_p: .asciz "p "
+	text_q: .asciz "q "
+	text_r: .asciz "r "
+	text_s: .asciz "s "
+	text_t: .asciz "t "
+	text_u: .asciz "u "
+	text_v: .asciz "v "
+	text_w: .asciz "w "
+	text_x: .asciz "x "
+	text_y: .asciz "y "
+	text_z: .asciz "z "
 
 .text
 
@@ -338,10 +369,504 @@ et_parcurgere:
 	jmp et_parcurgere
 
 et_variabila:
+	movl curr, %ecx
+	addl $12, %ecx
+	movl $1, prod
+	movl $0, nr
+
+	jmp et_variabila_loop
+
+	addl $12, curr
+	jmp et_parcurgere
+
+et_variabila_loop:
+	subl $1, %ecx
+	movl %ecx, %eax
+	subl curr, %eax
+
+	cmp $3, %eax
+	je et_variabila_afisare
+
+	pushl %edx
+
+	xorl %edx, %edx
+
+	movb (%edi, %ecx, 1), %al
+	cmp $49, %al
+	je et_variabila_adun
+	
+	xorl %edx, %edx
+	movl prod, %eax
+	movl $2, %ebx
+	mul %ebx
+	movl %eax, prod
+
+	popl %edx
+	jmp et_variabila_loop
+
+et_variabila_adun:
+	movl prod, %eax
+	addl %eax, nr
+
+	xorl %edx, %edx
+	movl prod, %eax
+	movl $2, %ebx
+	mul %ebx
+	movl %eax, prod
+
+	popl %edx
+	jmp et_variabila_loop
+
+et_variabila_afisare:
+	cmp $97, nr
+	je et_afis_a
+
+	cmp $98, nr
+	je et_afis_b
+
+	cmp $99, nr
+	je et_afis_c
+
+	cmp $100, nr
+	je et_afis_d
+
+	cmp $101, nr
+	je et_afis_e
+
+	cmp $102, nr
+	je et_afis_f
+
+	cmp $103, nr
+	je et_afis_g
+
+	cmp $104, nr
+	je et_afis_h
+
+	cmp $105, nr
+	je et_afis_i
+
+	cmp $106, nr
+	je et_afis_j
+
+	cmp $107, nr
+	je et_afis_k
+
+	cmp $108, nr
+	je et_afis_l
+
+	cmp $109, nr
+	je et_afis_m
+
+	cmp $110, nr
+	je et_afis_n
+
+	cmp $111, nr
+	je et_afis_o
+
+	cmp $112, nr
+	je et_afis_p
+
+	cmp $113, nr
+	je et_afis_q
+
+	cmp $114, nr
+	je et_afis_r
+
+	cmp $115, nr
+	je et_afis_s
+
+	cmp $116, nr
+	je et_afis_t
+
+	cmp $117, nr
+	je et_afis_u
+
+	cmp $118, nr
+	je et_afis_v
+
+	cmp $119, nr
+	je et_afis_w
+
+	cmp $120, nr
+	je et_afis_x
+
+	cmp $121, nr
+	je et_afis_y
+
+	cmp $122, nr
+	je et_afis_z
+
+	addl $12, curr
+	jmp et_parcurgere
+
+et_afis_a:
+
+	pushl $text_a
+	pushl $formatPrintfLinie
+	call printf
+	popl %ebx
+	popl %ebx
+
+	addl $12, curr
+	jmp et_parcurgere
+
+et_afis_b:
+
+	pushl $text_b
+	pushl $formatPrintfLinie
+	call printf
+	popl %ebx
+	popl %ebx
+
+	addl $12, curr
+	jmp et_parcurgere
+
+et_afis_c:
+
+	pushl $text_c
+	pushl $formatPrintfLinie
+	call printf
+	popl %ebx
+	popl %ebx
+
+	addl $12, curr
+	jmp et_parcurgere
+
+et_afis_d:
+
+	pushl $text_d
+	pushl $formatPrintfLinie
+	call printf
+	popl %ebx
+	popl %ebx
+
+	addl $12, curr
+	jmp et_parcurgere
+
+et_afis_e:
+
+	pushl $text_e
+	pushl $formatPrintfLinie
+	call printf
+	popl %ebx
+	popl %ebx
+
+	addl $12, curr
+	jmp et_parcurgere
+
+et_afis_f:
+
+	pushl $text_f
+	pushl $formatPrintfLinie
+	call printf
+	popl %ebx
+	popl %ebx
+
+	addl $12, curr
+	jmp et_parcurgere
+
+et_afis_g:
+
+	pushl $text_g
+	pushl $formatPrintfLinie
+	call printf
+	popl %ebx
+	popl %ebx
+
+	addl $12, curr
+	jmp et_parcurgere
+
+et_afis_h:
+
+	pushl $text_h
+	pushl $formatPrintfLinie
+	call printf
+	popl %ebx
+	popl %ebx
+
+	addl $12, curr
+	jmp et_parcurgere
+
+et_afis_i:
+
+	pushl $text_i
+	pushl $formatPrintfLinie
+	call printf
+	popl %ebx
+	popl %ebx
+
+	addl $12, curr
+	jmp et_parcurgere
+
+et_afis_j:
+
+	pushl $text_j
+	pushl $formatPrintfLinie
+	call printf
+	popl %ebx
+	popl %ebx
+
+	addl $12, curr
+	jmp et_parcurgere
+
+et_afis_k:
+
+	pushl $text_k
+	pushl $formatPrintfLinie
+	call printf
+	popl %ebx
+	popl %ebx
+
+	addl $12, curr
+	jmp et_parcurgere
+
+et_afis_l:
+
+	pushl $text_l
+	pushl $formatPrintfLinie
+	call printf
+	popl %ebx
+	popl %ebx
+
+	addl $12, curr
+	jmp et_parcurgere
+
+et_afis_m:
+
+	pushl $text_m
+	pushl $formatPrintfLinie
+	call printf
+	popl %ebx
+	popl %ebx
+
+	addl $12, curr
+	jmp et_parcurgere
+
+et_afis_n:
+
+	pushl $text_n
+	pushl $formatPrintfLinie
+	call printf
+	popl %ebx
+	popl %ebx
+
+	addl $12, curr
+	jmp et_parcurgere
+
+et_afis_o:
+
+	pushl $text_o
+	pushl $formatPrintfLinie
+	call printf
+	popl %ebx
+	popl %ebx
+
+	addl $12, curr
+	jmp et_parcurgere
+
+et_afis_p:
+
+	pushl $text_p
+	pushl $formatPrintfLinie
+	call printf
+	popl %ebx
+	popl %ebx
+
+	addl $12, curr
+	jmp et_parcurgere
+
+et_afis_q:
+
+	pushl $text_q
+	pushl $formatPrintfLinie
+	call printf
+	popl %ebx
+	popl %ebx
+
+	addl $12, curr
+	jmp et_parcurgere
+
+et_afis_r:
+
+	pushl $text_r
+	pushl $formatPrintfLinie
+	call printf
+	popl %ebx
+	popl %ebx
+
+	addl $12, curr
+	jmp et_parcurgere
+
+et_afis_s:
+
+	pushl $text_s
+	pushl $formatPrintfLinie
+	call printf
+	popl %ebx
+	popl %ebx
+
+	addl $12, curr
+	jmp et_parcurgere
+
+et_afis_t:
+
+	pushl $text_t
+	pushl $formatPrintfLinie
+	call printf
+	popl %ebx
+	popl %ebx
+
+	addl $12, curr
+	jmp et_parcurgere
+
+et_afis_u:
+
+	pushl $text_u
+	pushl $formatPrintfLinie
+	call printf
+	popl %ebx
+	popl %ebx
+
+	addl $12, curr
+	jmp et_parcurgere
+
+et_afis_v:
+
+	pushl $text_v
+	pushl $formatPrintfLinie
+	call printf
+	popl %ebx
+	popl %ebx
+
+	addl $12, curr
+	jmp et_parcurgere
+
+et_afis_w:
+
+	pushl $text_w
+	pushl $formatPrintfLinie
+	call printf
+	popl %ebx
+	popl %ebx
+
+	addl $12, curr
+	jmp et_parcurgere
+
+et_afis_x:
+
+	pushl $text_x
+	pushl $formatPrintfLinie
+	call printf
+	popl %ebx
+	popl %ebx
+
+	addl $12, curr
+	jmp et_parcurgere
+
+et_afis_y:
+
+	pushl $text_y
+	pushl $formatPrintfLinie
+	call printf
+	popl %ebx
+	popl %ebx
+
+	addl $12, curr
+	jmp et_parcurgere
+
+et_afis_z:
+
+	pushl $text_z
+	pushl $formatPrintfLinie
+	call printf
+	popl %ebx
+	popl %ebx
+
 	addl $12, curr
 	jmp et_parcurgere
 
 et_intreg:
+	movl curr, %ecx
+	addl $12, %ecx
+	movl $1, prod
+	movl $0, nr
+
+	jmp et_intreg_loop
+
+	addl $12, curr
+	jmp et_parcurgere
+
+et_intreg_loop:
+	subl $1, %ecx
+	movl %ecx, %eax
+	subl curr, %eax
+
+	cmp $3, %eax
+	je et_intreg_afisare
+
+	pushl %edx
+
+	xorl %edx, %edx
+
+	movb (%edi, %ecx, 1), %al
+	cmp $49, %al
+	je et_intreg_adun
+	
+	xorl %edx, %edx
+	movl prod, %eax
+	movl $2, %ebx
+	mul %ebx
+	movl %eax, prod
+
+	popl %edx
+	jmp et_intreg_loop
+
+et_intreg_adun:
+	movl prod, %eax
+	addl %eax, nr
+
+	xorl %edx, %edx
+	movl prod, %eax
+	movl $2, %ebx
+	mul %ebx
+	movl %eax, prod
+
+	popl %edx
+	jmp et_intreg_loop
+
+et_intreg_afisare:
+	movl curr, %ecx
+	addl $3, %ecx
+
+	movb (%edi, %ecx, 1), %al
+	cmp $49, %al
+	je et_intreg_minus
+
+	pushl nr
+	pushl $formatPrintfNr
+	call printf
+	popl %ebx
+	popl %ebx
+	
+	addl $12, curr
+	jmp et_parcurgere
+
+et_intreg_minus:
+	pushl %edx
+	xorl %edx, %edx
+
+	movl nr, %eax
+	imul $-1, %eax
+	movl %eax, nr
+
+	popl %edx
+
+	pushl nr
+	pushl $formatPrintfNr
+	call printf
+	popl %ebx
+	popl %ebx
+
 	addl $12, curr
 	jmp et_parcurgere
 
@@ -445,7 +970,7 @@ et_let:
 	jmp et_parcurgere
 
 exit:
-	pushl $s2
+	pushl $endl
 	pushl $formatPrintf
 	call printf
 	popl %ebx
