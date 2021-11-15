@@ -1,6 +1,7 @@
 .data
 	formatScanf: .asciz "%s"
 	formatPrintf: .asciz "%s\n"
+	formatPrintfLinie: .asciz "%s"
 
 	s16: .space 1000
 	s2: .space 1000
@@ -24,6 +25,10 @@
 	valF: .asciz "1111" #15
 
 	text_div: .asciz "div "
+	text_let: .asciz "let "
+	text_add: .asciz "add "
+	text_sub: .asciz "sub "
+	text_mul: .asciz "mul "
 
 .text
 
@@ -336,17 +341,34 @@ et_variabila:
 	addl $12, curr
 	jmp et_parcurgere
 
+et_intreg:
+	addl $12, curr
+	jmp et_parcurgere
+
 et_operatie:
 	movl curr, %ecx
 	addl $9, %ecx
 
 	movb (%edi, %ecx, 1), %al
-	cmp $48, %al
+	cmp $49, %al
 	je et_div
+
+	movl curr, %ecx
+	addl $10, %ecx
+
+	movb (%edi, %ecx, 1), %al
+	cmp $49, %al
+	je et_mul_sau_sub
+
+	cmp $48, %al
+	je et_add_sau_let
+
+	addl $12, curr
+	jmp et_parcurgere
 
 et_div:
 	pushl $text_div
-	pushl $formatPrintf
+	pushl $formatPrintfLinie
 	call printf
 	popl %ebx
 	popl %ebx
@@ -354,7 +376,71 @@ et_div:
 	addl $12, curr
 	jmp et_parcurgere
 
-et_intreg:
+et_mul_sau_sub:
+	movl curr, %ecx
+	addl $11, %ecx
+
+	movb (%edi, %ecx, 1), %al
+	cmp $49, %al
+	je et_mul
+
+	cmp $48, %al
+	je et_sub
+
+	addl $12, curr
+	jmp et_parcurgere
+
+et_mul:
+	pushl $text_mul
+	pushl $formatPrintfLinie
+	call printf
+	popl %ebx
+	popl %ebx
+
+	addl $12, curr
+	jmp et_parcurgere
+
+et_sub:
+	pushl $text_sub
+	pushl $formatPrintfLinie
+	call printf
+	popl %ebx
+	popl %ebx
+
+	addl $12, curr
+	jmp et_parcurgere
+
+et_add_sau_let:
+	movl curr, %ecx
+	addl $11, %ecx
+
+	movb (%edi, %ecx, 1), %al
+	cmp $49, %al
+	je et_add
+
+	cmp $48, %al
+	je et_let
+
+	addl $12, curr
+	jmp et_parcurgere
+
+et_add:
+	pushl $text_add
+	pushl $formatPrintfLinie
+	call printf
+	popl %ebx
+	popl %ebx
+
+	addl $12, curr
+	jmp et_parcurgere
+
+et_let:
+	pushl $text_let
+	pushl $formatPrintfLinie
+	call printf
+	popl %ebx
+	popl %ebx
+
 	addl $12, curr
 	jmp et_parcurgere
 
