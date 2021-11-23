@@ -172,7 +172,7 @@ et_div_loop:
 
 et_rot90:
 	pushl m
-	pushl $formatprintfNr
+	pushl $formatPrintfNr
 	call printf
 	popl %ebx
 	popl %ebx
