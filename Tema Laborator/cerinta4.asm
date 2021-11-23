@@ -199,7 +199,7 @@ et_rot90_loop:
 		movl (%edi, %ecx, 4), %eax
 
 		pushl %eax
-		pushl $formatPrintf
+		pushl $formatPrintfNr
 		call printf
 		popl %ebx
 		popl %ebx
