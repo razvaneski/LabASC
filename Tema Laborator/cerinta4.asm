@@ -207,7 +207,8 @@ et_rot90_loop:
 		movl start, %eax
 		subl m, %eax
 		movl %eax, start
-
+		jmp et_parcurg
+		
 	et_cont:
 		incl curr
 		jmp et_rot90_loop
