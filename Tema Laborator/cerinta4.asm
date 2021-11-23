@@ -178,7 +178,7 @@ et_rot90:
 	subl m, %eax
 
 	movl %eax, start
-	movl $1, curr
+	movl $0, curr
 
 et_rot90_loop:
 	movl curr, %eax
@@ -208,7 +208,7 @@ et_rot90_loop:
 		subl m, %eax
 		movl %eax, start
 		jmp et_parcurg
-		
+
 	et_cont:
 		incl curr
 		jmp et_rot90_loop
