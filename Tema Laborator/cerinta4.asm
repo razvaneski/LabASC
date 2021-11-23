@@ -192,7 +192,7 @@ et_rot90_loop:
 
 	et_parcurg:
 		cmp $0, start
-		jle et_cont
+		jl et_cont
 
 		movl start, %ecx
 		movl $mat, %edi
