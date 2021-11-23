@@ -14,6 +14,9 @@
 	x: .space 4
 	s: .space 400
 	curr: .space 4
+	start: .space 4
+	ind: .space 4
+
 .text
 
 .global main
@@ -98,6 +101,9 @@ et_op:
 	cmp $100, %al
 	je et_div
 
+	cmp $114, %al
+	je et_rot90
+
 	jmp et_exit
 
 et_add:
@@ -163,6 +169,48 @@ et_div_loop:
 	movl %eax, (%edi, %ecx, 4)
 	incl %ecx
 	jmp et_div_loop
+
+et_rot90:
+	movl $mat, %edi
+	xorl %ecx, %ecx
+
+	movl nrElem, %eax
+	subl m, %eax
+
+	movl %eax, start
+	movl $1, curr
+
+et_rot90_loop:
+	movl curr, %eax
+	cmp m, %eax
+	jg et_exit
+
+	movl nrElem, %eax
+	subl m, %eax
+	addl curr, %eax
+	movl %eax, start
+
+	et_parcurg:
+		cmp $0, start
+		jle et_cont
+
+		movl start, %ecx
+		movl $mat, %edi
+		movl (%edi, %ecx, 4), %eax
+
+		pushl %eax
+		pushl $formatPrintf
+		call printf
+		popl %ebx
+		popl %ebx
+
+		movl start, %eax
+		subl m, %eax
+		movl %eax, start
+
+	et_cont:
+		incl curr
+		jmp et_rot90_loop
 
 et_print:
 	movl $0, curr
