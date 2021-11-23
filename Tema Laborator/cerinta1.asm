@@ -3,6 +3,7 @@
 	formatPrintf: .asciz "%s\n"
 	formatPrintfLinie: .asciz "%s"
 	formatPrintfNr: .asciz "%d "
+	formatMinus: .asciz "-"
 	endl: .asciz ""
 
 	s16: .space 1000
@@ -852,14 +853,9 @@ et_intreg_afisare:
 	jmp et_parcurgere
 
 et_intreg_minus:
-	pushl %edx
-	xorl %edx, %edx
-
-	movl nr, %eax
-	imul $-1, %eax
-	movl %eax, nr
-
-	popl %edx
+	pushl $formatMinus
+	call printf
+	popl %ebx
 
 	pushl nr
 	pushl $formatPrintfNr
