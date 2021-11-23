@@ -1,34 +1,31 @@
 .data
-	str: .asciz "0101010"
-	formatPrintf: .asciz "%c\n"
-	formatPrintfNr: .asciz "%d\n"
-	aux: .space 4
+	a: .long 15
+	b: .long 15
+	res: .space 4
+
+	formatPrintf: .asciz "%d\n"
+
 .text
 
 .global main
 
 main:
-	xorl %ecx, %ecx
-	xorl %eax, %eax
-	addl $1, %ecx
-	movl $str, %edi
-	movb (%edi, %ecx, 1), %al
+	xorl %edx, %edx
+	movl a, %eax
+	movl b, %ebx
 
-	movl %eax, aux
+	cdq
+	idivl %ebx
 
-	pushl aux
-	call atoi
-	popl %ebx
+	movl %eax, res
 
-	movl %eax, aux
-
-	pushl aux
+	pushl res
 	pushl $formatPrintf
 	call printf
 	popl %ebx
 	popl %ebx
 
-exit:
+et_exit:
 	movl $1, %eax
 	xorl %ebx, %ebx
 	int $0x80
