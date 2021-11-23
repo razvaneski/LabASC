@@ -183,7 +183,7 @@ et_rot90:
 et_rot90_loop:
 	movl curr, %eax
 	cmp m, %eax
-	jg et_exit
+	jge et_exit
 
 	movl nrElem, %eax
 	subl m, %eax
