@@ -171,6 +171,18 @@ et_div_loop:
 	jmp et_div_loop
 
 et_rot90:
+	pushl m
+	pushl $formatprintfNr
+	call printf
+	popl %ebx
+	popl %ebx
+
+	pushl n
+	pushl $formatPrintfNr
+	call printf
+	popl %ebx
+	popl %ebx
+
 	movl $mat, %edi
 	xorl %ecx, %ecx
 
