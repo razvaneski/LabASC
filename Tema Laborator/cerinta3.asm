@@ -44,6 +44,7 @@ et_loop:
 	je et_text
 	
 	pushl nr
+
 	pushl $chDelim
 	pushl $0
 	call strtok
@@ -79,6 +80,29 @@ et_variabila:
 	jmp et_exit
 
 et_operator:
+	xorl %ecx, %ecx
+	movl res, %edi
+	movb (%edi, %ecx, 1), %al
+	
+	cmp $97, %al
+	je et_add
+	
+	cmp $115, %al
+	je et_sub
+	
+	cmp $109, %al
+	je et_mul
+	
+	cmp $100, %al
+	je et_div
+
+et_add:
+	popl %ebx
+	movl %ebx, aux
+	popl %ebx
+	addl %ebx, aux
+	pushl aux
+
 	pushl $chDelim
 	pushl $0
 	call strtok
@@ -86,6 +110,63 @@ et_operator:
 	popl %ebx
 	
 	movl %eax, res
+	
+	jmp et_loop
+
+et_sub: 
+	popl %ebx
+	movl %ebx, aux
+	popl %ebx
+	sub aux, %ebx
+	movl %ebx, aux
+	pushl aux
+
+	pushl $chDelim
+	pushl $0
+	call strtok
+	popl %ebx
+	popl %ebx
+	
+	movl %eax, res
+	
+	jmp et_loop
+	
+et_mul:
+	popl %ebx
+	popl %eax
+	xorl %edx, %edx
+	
+	mul %ebx
+	movl %eax, aux
+	pushl aux
+
+	pushl $chDelim
+	pushl $0
+	call strtok
+	popl %ebx
+	popl %ebx
+	
+	movl %eax, res
+	
+	jmp et_loop
+	
+et_div:
+	popl %ebx
+	popl %eax
+	xorl %edx, %edx
+	
+	div %ebx
+	movl %eax, aux
+	pushl aux
+
+	pushl $chDelim
+	pushl $0
+	call strtok
+	popl %ebx
+	popl %ebx
+	
+	movl %eax, res
+	
 	jmp et_loop
 
 et_exit:
