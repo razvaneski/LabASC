@@ -69,9 +69,23 @@ et_variabila:
 	call printf
 	popl %ebx
 	popl %ebx
+	pushl $chDelim
+	pushl $0
+	call strtok
+	popl %ebx
+	popl %ebx
+	
+	movl %eax, res
 	jmp et_exit
 
 et_operator:
+	pushl $chDelim
+	pushl $0
+	call strtok
+	popl %ebx
+	popl %ebx
+	
+	movl %eax, res
 	jmp et_loop
 
 et_exit:
