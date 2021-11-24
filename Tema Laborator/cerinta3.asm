@@ -81,7 +81,7 @@ et_variabila:
 
 	pushl %ebx
 
-	pushl %ebx
+	pushl %eax
 	pushl $formatPrintfN
 	call printf
 	popl %ebx
@@ -124,6 +124,29 @@ et_operator:
 	
 	cmp $100, %al
 	je et_div
+
+	cmp $108, %al
+	je et_let
+
+et_let:
+	pushl $formatPrintfN
+	call printf
+	popl %ebx
+	popl %ebx
+
+	pushl $formatPrintfN
+	call printf
+	popl %ebx
+	popl %ebx
+
+	pushl $chDelim
+	pushl $0
+	call strtok
+	popl %ebx
+	popl %ebx
+	
+	movl %eax, res
+	jmp et_loop
 
 et_add:
 	popl %ebx
