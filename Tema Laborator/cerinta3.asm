@@ -1,5 +1,6 @@
 .data
 	str: .space 1000
+	val: .space 1000
 	formatScanf: .asciz "%[^\n]s"
 	formatPrintfS: .asciz "%s\n"
 	formatPrintfN: .asciz "%d\n"
@@ -70,6 +71,7 @@ et_variabila:
 	call printf
 	popl %ebx
 	popl %ebx
+
 	pushl $chDelim
 	pushl $0
 	call strtok
@@ -77,7 +79,7 @@ et_variabila:
 	popl %ebx
 	
 	movl %eax, res
-	jmp et_exit
+	jmp et_loop
 
 et_operator:
 	xorl %ecx, %ecx
