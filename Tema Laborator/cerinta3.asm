@@ -32,7 +32,7 @@ main:
 
 et_loop:
 	cmp $0, res
-	je exit
+	je et_exit
 	
 	pushl res
 	call atoi
