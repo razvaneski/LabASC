@@ -177,7 +177,7 @@ et_mul:
 	popl %eax
 	xorl %edx, %edx
 	
-	mul %ebx
+	imul %ebx
 	movl %eax, aux
 	pushl aux
 
@@ -196,7 +196,8 @@ et_div:
 	popl %eax
 	xorl %edx, %edx
 	
-	div %ebx
+	cdq
+	idivl %ebx
 	movl %eax, aux
 	pushl aux
 
