@@ -6,7 +6,7 @@
 	formatPrintfN: .asciz "%d\n"
 	nr: .space 4
 	res: .space 4
-
+ 
 	aux: .space 4
 		
 	chDelim: .asciz " "
