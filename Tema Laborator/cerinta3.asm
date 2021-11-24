@@ -66,7 +66,11 @@ et_text:
 	jmp et_operator
 
 et_variabila:
-	pushl res
+	xorl %ecx, %ecx
+	movl res, %edi
+	movb (%edi, %ecx, 1), %al
+
+	pushl %eax
 	pushl $formatPrintfS
 	call printf
 	popl %ebx
