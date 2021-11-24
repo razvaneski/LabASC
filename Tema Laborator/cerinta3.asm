@@ -70,6 +70,7 @@ et_variabila:
 	xorl %eax, %eax
 	movl res, %edi
 	movb (%edi, %ecx, 1), %al
+	subl $97, %eax
 
 	pushl %eax
 	pushl $formatPrintfN
