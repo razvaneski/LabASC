@@ -72,7 +72,7 @@ et_variabila:
 	movb (%edi, %ecx, 1), %al
 
 	pushl %eax
-	pushl $formatPrintfS
+	pushl $formatPrintfN
 	call printf
 	popl %ebx
 	popl %ebx
