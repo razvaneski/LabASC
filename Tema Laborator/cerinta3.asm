@@ -67,6 +67,7 @@ et_text:
 
 et_variabila:
 	xorl %ecx, %ecx
+	xorl %eax, %eax
 	movl res, %edi
 	movb (%edi, %ecx, 1), %al
 
