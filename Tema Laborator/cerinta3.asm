@@ -129,15 +129,10 @@ et_operator:
 	je et_let
 
 et_let:
-	pushl $formatPrintfN
-	call printf
 	popl %ebx
-	popl %ebx
-
-	pushl $formatPrintfN
-	call printf
-	popl %ebx
-	popl %ebx
+	popl %ecx
+	movl $val, %edi
+	movl %ebx, (%edi, %ecx, 4)
 
 	pushl $chDelim
 	pushl $0
