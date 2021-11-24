@@ -72,11 +72,32 @@ et_variabila:
 	movb (%edi, %ecx, 1), %al
 	subl $97, %eax
 
+	movl %eax, %ecx
+	movl $val, %edi
+	movl (%edi, %ecx, 4), %ebx
+
+	cmp $0, %ebx
+	je et_gol
+
+	pushl %ebx
+
 	pushl %eax
 	pushl $formatPrintfN
 	call printf
 	popl %ebx
 	popl %ebx
+
+	pushl $chDelim
+	pushl $0
+	call strtok
+	popl %ebx
+	popl %ebx
+	
+	movl %eax, res
+	jmp et_loop
+
+et_gol:
+	pushl %eax
 
 	pushl $chDelim
 	pushl $0
@@ -181,4 +202,3 @@ et_exit:
 	movl $1, %eax
 	xorl %ebx, %ebx
 	int $0x80
-	
