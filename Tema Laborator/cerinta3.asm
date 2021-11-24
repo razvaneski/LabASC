@@ -1,159 +1,137 @@
 .data
-	formatScanfNr: .asciz "%d"
-	formatScanfText: .asciz "%s"
-
-	formatPrintfNr: .asciz "%d "
-	formatPrintfText: .asciz "%s\n"
-	formatNewline: .asciz "\n"
-
-	mat: .space 10000
-	n: .space 4
-	m: .space 4
-	nrElem: .space 4
-	cnt: .space 4
-	x: .space 4
-	s: .space 400
-	curr: .space 4
+	str: .space 1000
+	formatScanf: .asciz "%[^\n]s"
+	formatPrintfS: .asciz "%s\n"
+	formatPrintfN: .asciz "%d\n"
+	nr: .space 4
+	res: .space 4
+	
+	aux: .space 4
+		
+	chDelim: .asciz " "
 .text
 
 .global main
 
 main:
-	pushl $s
-	pushl $formatScanfText
+	pushl $str #citire sir
+	pushl $formatScanf
 	call scanf
 	popl %ebx
 	popl %ebx
+	
+	pushl $chDelim #apelez strtok
+	pushl $str
+	call strtok
+	popl %ebx
+	popl %ebx
+	
+	movl %eax, res 
+	
+	pushl res #transform in int
+	call atoi
+	popl %ebx
+	
+	movl %eax, nr
+	pushl nr #incarc stiva cu primul numar
+	
+	jmp et_loop
 
-	pushl $n
-	pushl $formatScanfNr
-	call scanf
-	popl %ebx
-	popl %ebx
-
-	pushl $m
-	pushl $formatScanfNr
-	call scanf
-	popl %ebx
-	popl %ebx
-
-	xorl %edx, %edx
-	movl n, %eax
-	movl m, %ebx
-	mul %ebx
-	movl %eax, nrElem
-	movl $0, cnt
-
-et_read:
-	movl cnt, %eax
-	cmp %eax, nrElem
-	je et_op
-
-	pushl $x
-	pushl $formatScanfNr
-	call scanf
-	popl %ebx
-	popl %ebx
-
-	movl $mat, %edi
-	movl cnt, %ecx
-	movl x, %eax
-	movl %eax, (%edi, %ecx, 4)
-
-	incl cnt
-	jmp et_read
-
-et_op:
-	pushl $s
-	pushl $formatScanfText
-	call scanf
-	popl %ebx
-	popl %ebx
-
-	pushl $x
-	pushl $formatScanfNr
-	call scanf
-	popl %ebx
-	popl %ebx
-
-	pushl $s
-	pushl $formatScanfText
-	call scanf
-	popl %ebx
-	popl %ebx
-
-	movl $s, %edi
+et_operator:
+	
 	xorl %ecx, %ecx
+	movl res, %edi
 	movb (%edi, %ecx, 1), %al
-
+	
 	cmp $97, %al
 	je et_add
-
+	
 	cmp $115, %al
 	je et_sub
-
-	jmp et_exit
+	
+	cmp $109, %al
+	je et_mul
+	
+	cmp $100, %al
+	je et_div
+	
+	jmp et_loop
 
 et_add:
-	movl $mat, %edi
-	xorl %ecx, %ecx	
+	popl %ebx
+	movl %ebx, aux
+	popl %ebx
+	addl %ebx, aux
+	pushl aux
+	
+	jmp et_loop
 
-et_add_loop:
-	cmp %ecx, nrElem
-	je et_print
+et_sub: 
+	popl %ebx
+	movl %ebx, aux
+	popl %ebx
+	sub aux, %ebx
+	movl %ebx, aux
+	pushl aux
+	
+	jmp et_loop
+	
+et_mul:
+	popl %ebx
+	popl %eax
+	xorl %edx, %edx
+	
+	mul %ebx
+	movl %eax, aux
+	pushl aux
+	
+	jmp et_loop
+	
+et_div:
+	popl %ebx
+	popl %eax
+	xorl %edx, %edx
+	
+	div %ebx
+	movl %eax, aux
+	pushl aux
+	
+	jmp et_loop
 
-	movl x, %eax
+et_loop:
+	pushl $chDelim
+	pushl $0
+	call strtok
+	popl %ebx
+	popl %ebx
+	
+	movl %eax, res
+	cmp $0, res
+	je exit
+	
+	pushl res
+	call atoi
+	popl %ebx
+	
+	movl %eax, nr
+	
+	cmp $0, nr
+	je et_operator
+	
+	pushl nr
+	jmp et_loop
 
-	addl %eax, (%edi, %ecx, 4)
-	incl %ecx
-	jmp et_add_loop
-
-et_sub:
-	jmp et_exit
-
-et_print:
-	movl $0, curr
-
-	pushl n
-	pushl $formatPrintfNr
+exit:
+	popl %ebx
+	movl %ebx, nr
+	
+	pushl nr
+	pushl $formatPrintfN
 	call printf
 	popl %ebx
 	popl %ebx
-
-	pushl m
-	pushl $formatPrintfNr
-	call printf
-	popl %ebx
-	popl %ebx
-
-	jmp et_print_loop
-
-et_print_loop:
-	movl curr, %eax
-	cmp %eax, nrElem
-	je et_exit
-
-	movl $mat, %edi
-	movl curr, %ecx
-	movl (%edi, %ecx, 4), %eax
-
-	pushl %eax
-	pushl $formatPrintfNr
-	call printf
-	popl %ebx
-	popl %ebx
-
-	incl curr
-	jmp et_print_loop
-
-
-et_exit:
-	pushl $formatNewline
-	call printf
-	popl %ebx
-
+	
 	movl $1, %eax
 	xorl %ebx, %ebx
 	int $0x80
-
 	
