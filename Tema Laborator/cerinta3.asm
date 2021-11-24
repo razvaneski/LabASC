@@ -73,7 +73,7 @@ et_variabila:
 	subl $97, %eax
 
 	movl %eax, %ecx
-	movl $val, %edi
+	movl val, %edi
 	movl (%edi, %ecx, 4), %ebx
 
 	cmp $0, %ebx
