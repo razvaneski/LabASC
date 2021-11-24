@@ -16,7 +16,7 @@
 
 main:
 	pushl $str
-	pushl $formatscanf
+	pushl $formatScanf
 	call scanf
 	popl %ebx
 	popl %ebx
