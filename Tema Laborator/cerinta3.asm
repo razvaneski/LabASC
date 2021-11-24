@@ -81,12 +81,6 @@ et_variabila:
 
 	pushl %ebx
 
-	pushl %eax
-	pushl $formatPrintfN
-	call printf
-	popl %ebx
-	popl %ebx
-
 	pushl $chDelim
 	pushl $0
 	call strtok
