@@ -24,7 +24,12 @@ main:
 	popl %ebx
 	popl %ebx
 
+	xorl %edx, %edx
+	movl $3, %ebx
+	movl n, %eax
+	mull %ebx
 
+	movl %eax, nrElem
 
 	jmp et_citire
 
