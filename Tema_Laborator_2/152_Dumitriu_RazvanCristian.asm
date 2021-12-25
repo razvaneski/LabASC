@@ -5,6 +5,8 @@
 
 	n: .space 4
 	m: .space 4
+	nrElem: .space 4
+
 .text
 
 .global main
@@ -22,14 +24,15 @@ main:
 	popl %ebx
 	popl %ebx
 
-et_exit:
-	pushl n
-	pushl $formatPrintf
-	call printf
-	popl %ebx
-	popl %ebx
 
-	pushl m
+
+	jmp et_citire
+
+et_citire:
+
+
+et_exit:
+	pushl nrElem
 	pushl $formatPrintf
 	call printf
 	popl %ebx
