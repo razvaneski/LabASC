@@ -34,15 +34,17 @@ citire:
 	mull %ebx
 
 	movl %eax, nrElem
-	
+
 	popl %ebp
 	ret
 
 .global main
 
 main:
-
+	pushl $101
 	call citire
+	popl %eax
+	movl %eax, nrElem
 
 et_exit:
 	pushl nrElem
