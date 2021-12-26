@@ -93,6 +93,7 @@ et_afisare_loop:
 	cmp nrElem, %eax
 	jle et_afisare_loop
 
+	call backslashN
 	popl %ebp
 	ret
 
@@ -101,12 +102,9 @@ et_afisare_loop:
 main:
 	
 	call citire
-	call backslashN
 	call afisare
 
 et_exit:
-	call backslashN
-
 	pushl nrElem
 	pushl $formatPrintf
 	call printf
