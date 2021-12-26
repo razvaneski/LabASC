@@ -9,8 +9,8 @@
 	i: .space 4
 	aux: .space 4
 
-	init: .space 1000
-	perm: .space 1000
+	init: .space 1000 # vectorul initial
+	perm: .space 1000 # permutarea finala
 
 .text
 
@@ -48,7 +48,8 @@ citire:
 
 	movl %eax, nrElem
 	movl $1, i
-	movl $perm, %edi # CHANGE TO INIT
+	movl $perm, %edi
+	movl $init, %esi
 	jmp et_citire_loop
 
 et_citire_loop:
@@ -60,7 +61,8 @@ et_citire_loop:
 
 	movl aux, %eax
 	movl i, %ecx
-	movl %eax, (%edi, %ecx, 4)
+	movl %eax, (%edi, %ecx, 4) # perm[i] = aux
+	movl %eax, (%esi, %ecx, 4) # init[i] = aux
 
 	incl i
 	movl i, %eax
