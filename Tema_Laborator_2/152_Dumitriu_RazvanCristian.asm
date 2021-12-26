@@ -7,8 +7,10 @@
 	m: .space 4
 	nrElem: .space 4
 	i: .space 4
+	aux: .space 4
 
 	init: .space 1000
+	perm: .space 1000
 
 .text
 
@@ -34,6 +36,50 @@ citire:
 	mull %ebx
 
 	movl %eax, nrElem
+	movl $1, i
+	movl perm, %edi // CHANGE TO INIT
+	jmp et_citire_loop
+
+et_citire_loop:
+	movl i, %ecx
+
+	pushl $aux
+	pushl $formatScanf
+	call scanf
+	popl %ebx
+	popl %ebx
+
+	movl aux, %eax
+	movl %eax, (%edi, %ecx, 4)
+
+	addl $1, i
+	cmp nrElem, i
+	jle et_citire_loop
+
+	popl %ebp
+	ret
+
+afisare:
+	pushl %ebp
+	movl %esp, %ebp
+
+	movl $1, i
+	movl perm, %edi
+	jmp et_afisare_loop
+
+et_afisare_loop:
+	movl i, %ecx
+	movl (%edi, %ecx, 4), %eax
+
+	pushl %eax
+	pushl $formatPrintf
+	call printf
+	popl %ebx
+	popl %ebx
+
+	addl $1, i
+	cmp nrElem, i
+	jle et_afisare_loop
 
 	popl %ebp
 	ret
@@ -41,10 +87,9 @@ citire:
 .global main
 
 main:
-	pushl $101
+	
 	call citire
-	popl %eax
-	movl %eax, nrElem
+	call afisare
 
 et_exit:
 	pushl nrElem
