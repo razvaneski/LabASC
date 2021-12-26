@@ -6,6 +6,7 @@
 	n: .space 4
 	m: .space 4
 	nrElem: .space 4
+	i: .space 4
 
 .text
 
@@ -31,10 +32,10 @@ main:
 
 	movl %eax, nrElem
 
+	movl $1, i
 	jmp et_citire
 
 et_citire:
-
 
 et_exit:
 	pushl nrElem
