@@ -69,7 +69,7 @@ et_citire_loop:
 	movl aux, %eax
 	movl %eax, (%edi, %ecx, 4)
 
-	addl $1, i
+	incl i
 	movl i, %eax
 	cmp nrElem, %eax
 	jle et_citire_loop
