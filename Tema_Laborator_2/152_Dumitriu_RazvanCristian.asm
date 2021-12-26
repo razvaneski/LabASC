@@ -37,7 +37,7 @@ citire:
 
 	movl %eax, nrElem
 	movl $1, i
-	movl perm, %edi // CHANGE TO INIT
+	movl perm, %edi # CHANGE TO INIT
 	jmp et_citire_loop
 
 et_citire_loop:
