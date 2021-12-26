@@ -53,7 +53,8 @@ et_citire_loop:
 	movl %eax, (%edi, %ecx, 4)
 
 	addl $1, i
-	cmp nrElem, i
+	movl i, %eax
+	cmp nrElem, %eax
 	jle et_citire_loop
 
 	popl %ebp
@@ -78,7 +79,8 @@ et_afisare_loop:
 	popl %ebx
 
 	addl $1, i
-	cmp nrElem, i
+	movl i, %eax
+	cmp nrElem, %eax
 	jle et_afisare_loop
 
 	popl %ebp
