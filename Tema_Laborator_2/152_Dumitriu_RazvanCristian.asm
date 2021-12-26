@@ -8,11 +8,14 @@
 	nrElem: .space 4
 	i: .space 4
 
+	init: .space 1000
+
 .text
 
-.global main
+citire:
+	pushl %ebp
+	movl %esp, %ebp
 
-main:
 	pushl $n
 	pushl $formatScanf
 	call scanf
@@ -31,11 +34,15 @@ main:
 	mull %ebx
 
 	movl %eax, nrElem
+	
+	popl %ebp
+	ret
 
-	movl $1, i
-	jmp et_citire
+.global main
 
-et_citire:
+main:
+
+	call citire
 
 et_exit:
 	pushl nrElem
