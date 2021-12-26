@@ -11,6 +11,7 @@
 
 	init: .space 1000 # vectorul initial
 	perm: .space 1000 # permutarea finala
+	f: .space 1000 # vector frecventa
 
 .text
 
@@ -61,8 +62,15 @@ et_citire_loop:
 
 	movl aux, %eax
 	movl i, %ecx
+	movl $init, %esi
 	movl %eax, (%edi, %ecx, 4) # perm[i] = aux
 	movl %eax, (%esi, %ecx, 4) # init[i] = aux
+
+	movl aux, %ecx
+	movl $f, %esi
+	movl (%esi, %ecx, 4), %eax
+	incl %eax
+	movl %eax, (%esi, %ecx, 4) # f[aux] += 1
 
 	incl i
 	movl i, %eax
@@ -77,7 +85,7 @@ afisare:
 	movl %esp, %ebp
 
 	movl $1, i
-	movl $init, %edi
+	movl $f, %edi
 	jmp et_afisare_loop
 
 et_afisare_loop:
@@ -99,12 +107,26 @@ et_afisare_loop:
 	popl %ebp
 	ret
 
+bkt:
+	pushl %ebp
+	movl %esp, %ebp
+
+	movl $1, i
+	jmp bkt_loop
+
+bkt_loop:
+	movl i, %eax
+
+	popl %ebp
+	ret
+
 .global main
 
 main:
-	
 	call citire
+	call bkt
 	call afisare
+	jmp et_exit
 
 et_exit:
 	pushl nrElem
