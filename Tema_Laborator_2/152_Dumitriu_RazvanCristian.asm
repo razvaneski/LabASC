@@ -52,8 +52,6 @@ citire:
 	jmp et_citire_loop
 
 et_citire_loop:
-	movl i, %ecx
-
 	pushl $aux
 	pushl $formatScanf
 	call scanf
@@ -67,6 +65,7 @@ et_citire_loop:
 	popl %ebx
 
 	movl aux, %eax
+	movl i, %ecx
 	movl %eax, (%edi, %ecx, 4)
 
 	incl i
@@ -95,7 +94,7 @@ et_afisare_loop:
 	popl %ebx
 	popl %ebx
 
-	addl $1, i
+	incl i
 	movl i, %eax
 	cmp nrElem, %eax
 	jle et_afisare_loop
