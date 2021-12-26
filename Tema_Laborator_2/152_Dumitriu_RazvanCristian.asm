@@ -112,6 +112,8 @@ main:
 	call afisare
 
 et_exit:
+	call backslashN
+
 	pushl nrElem
 	pushl $formatPrintf
 	call printf
