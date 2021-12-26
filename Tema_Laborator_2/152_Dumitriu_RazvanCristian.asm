@@ -77,7 +77,7 @@ afisare:
 	movl %esp, %ebp
 
 	movl $1, i
-	movl $perm, %edi
+	movl $init, %edi
 	jmp et_afisare_loop
 
 et_afisare_loop:
