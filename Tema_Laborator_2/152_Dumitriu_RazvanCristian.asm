@@ -58,12 +58,6 @@ et_citire_loop:
 	popl %ebx
 	popl %ebx
 
-	pushl aux
-	pushl $formatPrintf
-	call printf
-	popl %ebx
-	popl %ebx
-
 	movl aux, %eax
 	movl i, %ecx
 	movl %eax, (%edi, %ecx, 4)
