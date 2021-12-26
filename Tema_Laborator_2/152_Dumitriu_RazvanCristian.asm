@@ -14,6 +14,17 @@
 
 .text
 
+backslashN:
+	pushl %ebp
+	movl %esp, %ebp
+
+	pushl $formatNewline
+	call printf
+	popl %ebx
+
+	popl %ebp
+	ret
+
 citire:
 	pushl %ebp
 	movl %esp, %ebp
@@ -97,6 +108,7 @@ et_afisare_loop:
 main:
 	
 	call citire
+	call backslashN
 	call afisare
 
 et_exit:
@@ -105,10 +117,8 @@ et_exit:
 	call printf
 	popl %ebx
 	popl %ebx
-
-	pushl $formatNewline
-	call printf
-	popl %ebx
+	
+	call backslashN
 
 	movl $1, %eax
 	xorl %ebx, %ebx
