@@ -112,7 +112,8 @@ checkperm:
 	movl %esp, %ebp
 
 	movl 8(%ebp), %ecx
-	movl (%edi, %ecx, 4), x
+	movl (%edi, %ecx, 4), %eax
+	movl %eax, x
 
 	pushl x
 	pushl $formatPrintf
