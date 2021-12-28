@@ -133,6 +133,8 @@ main:
 	call checkperm
 	popl %ebx
 
+	call backslashN
+
 exit:
 	movl $1, %eax
 	xorl %ebx, %ebx
