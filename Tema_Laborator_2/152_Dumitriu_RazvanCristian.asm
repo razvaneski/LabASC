@@ -7,13 +7,11 @@
 	m: .space 4
 	nrElem: .space 4
 	i: .space 4
-	aux: .space 4
-	curr: .space 4
-	elem: .space 4
+	x: .space 4
 
-	init: .space 1000 # vectorul initial
-	perm: .space 1000 # permutarea finala
-	f: .space 1000 # vector frecventa
+	init: .zero 1000 # vectorul initial
+	perm: .zero 1000 # permutarea finala
+	f: .zero 1000 # vector frecventa
 
 .text
 
@@ -28,7 +26,7 @@ backslashN:
 	popl %ebp
 	ret
 
-citire:
+readproc:
 	pushl %ebp
 	movl %esp, %ebp
 
@@ -53,9 +51,9 @@ citire:
 	movl $1, i
 	movl $perm, %edi
 	movl $init, %esi
-	jmp et_citire_loop
+	jmp readproc_loop
 
-et_citire_loop:
+readproc_loop:
 	pushl $aux
 	pushl $formatScanf
 	call scanf
@@ -77,20 +75,20 @@ et_citire_loop:
 	incl i
 	movl i, %eax
 	cmp nrElem, %eax
-	jle et_citire_loop
+	jle readproc_loop
 
 	popl %ebp
 	ret
 
-afisare:
+printproc:
 	pushl %ebp
 	movl %esp, %ebp
 
 	movl $1, i
 	movl $perm, %edi
-	jmp et_afisare_loop
+	jmp printproc_loop
 
-et_afisare_loop:
+printproc_loop:
 	movl i, %ecx
 	movl (%edi, %ecx, 4), %eax
 
@@ -103,97 +101,37 @@ et_afisare_loop:
 	incl i
 	movl i, %eax
 	cmp nrElem, %eax
-	jle et_afisare_loop
+	jle printproc_loop
 
 	call backslashN
 	popl %ebp
 	ret
 
-bkt:
+checkperm:
 	pushl %ebp
 	movl %esp, %ebp
 
-	movl $1, curr
-	jmp bkt_loop
+	movl 8(%ebp), %ecx
+	movl (%edi, %ecx, 4), x
 
-bkt_loop:
-	movl $init, %edi
-	movl curr, %ecx
-	movl (%edi, %ecx, 4), %eax
-
-	cmp $0, %eax
-	jne bkt_skip
-
-	movl $perm, %edi
-	movl curr, %ecx
-	movl (%edi, %ecx, 4), %eax
-	movl %eax, i # i = perm[curr]
-	movl $0, (%edi, %ecx, 4) # perm[curr] = 0
-
-	movl $f, %edi
-	movl i, %ecx
-	movl (%edi, %ecx, 4), %eax
-	subl $1, %eax
-	movl %eax, (%edi, %ecx, 4) # f[perm[curr] (initial)] -= 1
-
-	addl $1, i # i = perm[curr] (initial) + 1
-
-	movl $0, elem
-	jmp bkt_search
-
-bkt_search:
-	movl i, %eax
-	cmp n, %eax
-	jg bkt_go_back
-
-	movl elem, %eax
-	cmp $0, %eax
-	jne bkt_add
-
-	movl $f, %edi
-	movl i, %ecx
-	movl (%edi, %ecx, 4), %eax # eax = f[i]
-
-	cmp $3, %eax
-	jge bkt_search_next
-
-
-bkt_next:
-	incl curr # REMOVE
-
-	movl curr, %eax
-	cmp nrElem, %eax
-	jle bkt_loop
+	pushl x
+	pushl $formatPrintf
+	call printf
+	popl %ebx
+	popl %ebx
 
 	popl %ebp
 	ret
-
-bkt_skip:
-	incl curr
-	jmp bkt_next
-
-bkt_search_next:
-	incl i
-	jmp bkt_search
 
 
 .global main
 
 main:
-	call citire
-	call bkt
-	call afisare
-	jmp et_exit
-
-et_exit:
-	pushl nrElem
-	pushl $formatPrintf
-	call printf
+	pushl $5
+	call checkperm
 	popl %ebx
-	popl %ebx
-	
-	call backslashN
 
+exit:
 	movl $1, %eax
 	xorl %ebx, %ebx
 	int $0x80
