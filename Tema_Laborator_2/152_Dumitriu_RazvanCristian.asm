@@ -8,6 +8,7 @@
 	nrElem: .space 4
 	i: .space 4
 	x: .space 4
+	aux: .space 4
 
 	init: .zero 1000 # vectorul initial
 	perm: .zero 1000 # permutarea finala
