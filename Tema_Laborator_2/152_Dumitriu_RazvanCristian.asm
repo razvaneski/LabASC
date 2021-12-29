@@ -115,11 +115,26 @@ printproc_continue:
 	popl %ebp
 	ret
 
+bkt_init:
+	pushl %ebp
+	movl %esp, %ebp
+
+	movl $1, curr
+	movl $perm, %edi
+	movl $f, %esi
+	jmp bkt
+
+bkt:
+
+	popl %ebp
+	ret
+
 
 .global main
 
 main:
 	call readproc
+	call bkt_init
 	call printproc
 	call backslashN
 	jmp exit
