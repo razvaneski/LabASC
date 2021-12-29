@@ -141,7 +141,7 @@ bkt:
 	movl %eax, i
 	incl i # i = perm[curr] + 1
 	decl (%esi, %eax, 4) # f[perm[curr]] -= 1
-	movl $0, (%edi, %ecx, 4) # perm[curr] = 0
+	movl $5, (%edi, %ecx, 4) # perm[curr] = 0
 
 	incl curr
 	jmp bkt
