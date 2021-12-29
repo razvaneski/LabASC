@@ -97,7 +97,7 @@ printproc_loop:
 printproc_negativ:
 	movl $-1, %ebx
 	xorl %edx, %edx
-	imull %eax
+	imull %ebx
 
 printproc_continue:
 	pushl %eax
