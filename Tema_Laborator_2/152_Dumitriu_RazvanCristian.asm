@@ -89,6 +89,17 @@ printproc_loop:
 	movl i, %ecx
 	movl (%edi, %ecx, 4), %eax
 
+	cmp $0, %eax
+	jl printproc_negativ
+
+	jmp printproc_continue
+
+printproc_negativ:
+	movl $-1, %ebx
+	xorl %edx, %edx
+	imull %eax
+
+printproc_continue:
 	pushl %eax
 	pushl $formatPrintf
 	call printf
@@ -104,16 +115,6 @@ printproc_loop:
 	popl %ebp
 	ret
 
-bkt:
-	pushl %ebp
-	movl %esp, %ebp
-
-	movl $1, i
-	movl $perm, %edi
-	movl i, %ecx
-
-	movl (%edi, %ecx, 4), %eax
-	movl %eax, curr
 
 .global main
 

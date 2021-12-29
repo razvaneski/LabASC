@@ -1,6 +1,6 @@
 .data
 	vf: .space 201
-	v : .space 801
+	v: .space 801
 	formatScanf: .asciz "%d"
 	formatPrintf: .asciz "%s\n"
 	semnafis: .asciz "-"
