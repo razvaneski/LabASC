@@ -47,7 +47,7 @@ check_forward:
 	
 	incl %eax
 	cmp m, %eax
-	jl for_check_plus
+	jl check_forward
 
 check_next:
 	xorl %eax, %eax
