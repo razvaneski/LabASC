@@ -1,6 +1,6 @@
 .data
 	vf: .space 201
-	v: .space 801
+	v : .space 801
 	formatScanf: .asciz "%d"
 	formatPrintf: .asciz "%s\n"
 	semnafis: .asciz "-"
@@ -14,13 +14,13 @@
 	y: .space 4
 	n: .space 4
 	m: .space 4
-	nrElem: .space 4
+	nr: .space 4
 	q: .long -1
 .text
 
 .globl main
 
-check:
+verificare:
 	pushl %ebp
 	movl %esp, %ebp
 	movl 8(%ebp), %ecx
@@ -28,37 +28,37 @@ check:
 	movl %eax, x
 	xorl %eax, %eax
 	
-check_forward:
+for_verificare_plus:
 	incl %ecx
-	cmp nrElem, %ecx
-	jg check_next
+	cmp nr, %ecx
+	jg inainte
 	
 	pushl %eax
 	pushl %ebx
 	movl (%edi, %ecx, 4), %eax
 	cmp x, %eax
-	je check_wrong
+	je isnt_ok
 	movl q, %ebx
 	imul %ebx
 	cmp x, %eax
-	je check_wrong
+	je isnt_ok
 	popl %ebx
 	popl %eax
 	
 	incl %eax
 	cmp m, %eax
-	jl check_forward
+	jl for_verificare_plus
 
-check_next:
+inainte:
 	xorl %eax, %eax
 	movl 8(%ebp), %ecx
 	
-check_backward:
+for_verificare_minus:
 	pushl %ebx
 	pushl %ebx
 	decl %ecx
 	cmp $1, %ecx
-	jl check_correct
+	jl is_ok
 	popl %ebx
 	popl %ebx
 	
@@ -66,27 +66,27 @@ check_backward:
 	pushl %ebx
 	movl (%edi, %ecx, 4), %eax
 	cmp x, %eax
-	je check_wrong
+	je isnt_ok
 	movl q, %ebx
 	imul %ebx
 	cmp x, %eax
-	je check_wrong
+	je isnt_ok
 	popl %ebx
 	popl %eax
 	
 	incl %eax
 	cmp m, %eax
-	jl check_backward
+	jl for_verificare_minus
 	
 	pushl %eax
 	pushl %ebx
-check_correct:
+is_ok:
 	popl %ebx
 	popl %eax
 	movl $1, %eax
 	popl %ebp
 	ret
-check_wrong:
+isnt_ok:
 	popl %ebx
 	popl %eax
 	xorl %eax, %eax
@@ -111,7 +111,7 @@ bkt:
 	// crestem aparitiilr posibile
 	movl %eax, %ebx
 	
-bkt_replace:
+diferit_de_0:
 	incl %ebx 
 	// urm val pt pozitia data
 	movl %ebx, y
@@ -120,7 +120,7 @@ bkt_replace:
 	jg aia_e
 	cmp $0, %eax
 	jg ver
-	jmp bkt_replace
+	jmp diferit_de_0
 	
 
 aia_e: // inseamna ca dam inapoi
@@ -158,7 +158,7 @@ ver:
 	pushl %ecx
 	pushl %ebx
 	pushl %ecx
-	call check
+	call verificare
 	popl %ebx
 	popl %ebx
 	popl %ecx
@@ -192,7 +192,7 @@ citire:
 	movl n, %eax
 	addl n, %eax
 	addl n, %eax
-	movl %eax, nrElem
+	movl %eax, nr
 	
 	xorl %ecx, %ecx
 	lea vf, %esi
@@ -229,7 +229,7 @@ for_citire:
 	movl %eax, (%edi, %ecx, 4)
 	
 	inc %ecx
-	cmp nrElem, %ecx
+	cmp nr, %ecx
 	jle for_citire
 	
 	 xorl %ecx, %ecx
@@ -255,7 +255,7 @@ for_afisare1:
 	popl %ebx
 	popl %ecx
 	incl %ecx
-	cmp nrElem, %ecx
+	cmp nr, %ecx
 	jle for_afisare1
 
 	pushl $prn
@@ -271,10 +271,29 @@ for_afisare1:
 	cmp $-1, %eax
 	je nu_merge
 	
-	cmp nrElem, %eax
+	cmp nr, %eax
 	jle exit
 	
 	jmp iesire
+	
+
+	/*pushl $2
+	call bkt
+	popl %ebx
+	pushl %eax
+	pushl $prn
+	call printf
+	popl %ebx
+	popl %ebx
+	
+	pushl $2
+	call bkt
+	popl %ebx
+	pushl %eax
+	pushl $prn
+	call printf
+	popl %ebx
+	popl %ebx*/
 
 nu_merge:
 	pushl $qwert
