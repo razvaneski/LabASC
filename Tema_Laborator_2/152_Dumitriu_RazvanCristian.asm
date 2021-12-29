@@ -69,6 +69,9 @@ readproc_loop:
 	movl i, %ecx
 	movl %eax, (%edi, %ecx, 4) # perm[i] = -aux
 
+	movl aux, %ecx
+	incl (%esi, %ecx, 4) # f[aux] += 1
+
 	incl i
 	movl i, %eax
 	cmp nrElem, %eax
@@ -82,7 +85,7 @@ printproc:
 	movl %esp, %ebp
 
 	movl $1, i
-	movl $perm, %edi
+	movl $f, %edi
 	jmp printproc_loop
 
 printproc_loop:
