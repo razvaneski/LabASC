@@ -10,8 +10,7 @@
 	x: .space 4
 	aux: .space 4
 
-	init: .zero 1000 # vectorul initial
-	perm: .zero 1000 # permutarea finala
+	perm: .zero 1000 # permutarea finala - vom stoca elementele fixate cu minus
 	f: .zero 1000 # vector frecventa
 
 .text
@@ -50,8 +49,9 @@ readproc:
 
 	movl %eax, nrElem
 	movl $1, i
-	movl $perm, %edi
-	movl $init, %esi
+	lea f, %esi # intelegem pe parcursul programului %esi ~ f si %edi ~ perm
+	lea perm, %edi
+
 	jmp readproc_loop
 
 readproc_loop:
@@ -62,16 +62,11 @@ readproc_loop:
 	popl %ebx
 
 	movl aux, %eax
+	xorl %edx, %edx
+	movl $-1, %ebx
+	imull %ebx
 	movl i, %ecx
-	movl $init, %esi
-	movl %eax, (%edi, %ecx, 4) # perm[i] = aux
-	movl %eax, (%esi, %ecx, 4) # init[i] = aux
-
-	movl aux, %ecx
-	movl $f, %esi
-	movl (%esi, %ecx, 4), %eax
-	incl %eax
-	movl %eax, (%esi, %ecx, 4) # f[aux] += 1
+	movl %eax, (%edi, %ecx, 4) # perm[i] = -aux
 
 	incl i
 	movl i, %eax
@@ -108,32 +103,13 @@ printproc_loop:
 	popl %ebp
 	ret
 
-checkperm:
-	pushl %ebp
-	movl %esp, %ebp
-
-	movl 8(%ebp), %ecx
-	movl (%edi, %ecx, 4), %eax
-	movl %eax, x
-
-	pushl x
-	pushl $formatPrintf
-	call printf
-	popl %ebx
-	popl %ebx
-
-	popl %ebp
-	ret
-
-
 .global main
 
 main:
-	pushl $5
-	call checkperm
-	popl %ebx
-
+	call readproc
+	call printproc
 	call backslashN
+	jmp exit
 
 exit:
 	movl $1, %eax
