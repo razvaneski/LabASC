@@ -85,7 +85,7 @@ printproc:
 	movl %esp, %ebp
 
 	movl $1, i
-	movl $f, %edi
+	movl $perm, %edi
 	jmp printproc_loop
 
 printproc_loop:
@@ -128,7 +128,24 @@ bkt_init:
 	jmp bkt
 
 bkt:
+	movl curr, %eax
+	cmp nrElem, %eax
+	jg bkt_exit
 
+	movl curr, %ecx
+	movl (%edi, %ecx, 4), %eax
+
+	cmp $0, %eax
+	jl bkt_next
+
+	incl curr
+	jmp bkt
+
+bkt_next:
+	incl curr
+	jmp bkt
+
+bkt_exit:
 	popl %ebp
 	ret
 
