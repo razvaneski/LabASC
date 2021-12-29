@@ -9,6 +9,7 @@
 	i: .space 4
 	x: .space 4
 	aux: .space 4
+	curr: .space 4
 
 	perm: .zero 1000 # permutarea finala - vom stoca elementele fixate cu minus
 	f: .zero 1000 # vector frecventa
@@ -102,6 +103,17 @@ printproc_loop:
 	call backslashN
 	popl %ebp
 	ret
+
+bkt:
+	pushl %ebp
+	movl %esp, %ebp
+
+	movl $1, i
+	movl $perm, %edi
+	movl i, %ecx
+
+	movl (%edi, %ecx, 4), %eax
+	movl %eax, curr
 
 .global main
 
