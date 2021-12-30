@@ -123,7 +123,7 @@ printproc_continue:
 	popl %ebp
 	ret
 
-check_elem: # se va preinitializa pozitia prin variabila j, se returneaza t/f prin %eax
+check_elem: # se va preinitializa pozitia prin variabila j, valoarea prin i, se returneaza t/f prin %eax
 	pushl %ebp
 	movl %esp, %ebp
 
@@ -145,8 +145,7 @@ check_left:
 	movl poz, %ecx
 	movl (%edi, %ecx, 4), %eax
 
-	movl j, %ecx
-	movl (%edi, %ecx, 4), %ebx
+	movl i, %ebx
 
 	cmp %eax, %ebx
 	je check_fail
@@ -180,8 +179,7 @@ check_right:
 	movl poz, %ecx
 	movl (%edi, %ecx, 4), %eax
 
-	movl j, %ecx
-	movl (%edi, %ecx, 4), %ebx
+	movl i, %ebx
 
 	cmp %eax, %ebx
 	je check_fail
@@ -255,9 +253,11 @@ main:
 	jmp exit
 
 exit:
-
 	call backslashN
+
 	movl $3, j
+	movl $2, i
+
 	call check_elem
 
 	pushl %eax
@@ -267,7 +267,6 @@ exit:
 	popl %ebx
 
 	call backslashN
-
 
 	movl $1, %eax
 	xorl %ebx, %ebx
