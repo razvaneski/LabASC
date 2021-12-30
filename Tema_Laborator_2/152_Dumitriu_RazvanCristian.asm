@@ -7,11 +7,14 @@
 	m: .space 4
 	nrElem: .space 4
 	i: .space 4
+	j: .space 4
 	x: .space 4
 	aux: .space 4
 	curr: .space 4
 	cnt: .space 4
 	ok: .space 4
+	poz: .space 4
+	elem: .space 4
 
 	perm: .zero 1000 # permutarea finala - vom stoca elementele fixate cu minus
 	f: .zero 1000 # vector frecventa
