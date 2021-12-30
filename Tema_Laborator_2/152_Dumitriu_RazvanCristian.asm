@@ -299,11 +299,11 @@ bkt_found:
 	movl %eax, elem
 	jmp bkt_loop
 
-bkt_skip:
+bkt_skip: # curr += 1, bkt(curr)
 	incl curr
 	jmp bkt
 
-bkt_next:
+bkt_next: # perm[curr] = elem, curr += 1
 	movl curr, %ecx
 	movl elem, %eax
 	movl %eax, (%edi, %ecx, 4) # perm[curr] = elem
@@ -313,7 +313,7 @@ bkt_next:
 	incl curr
 	jmp bkt
 
-bkt_back:
+bkt_back: # mergem inapoi in perm pana cand gasim primul element ne-fixat (adica >= 0)
 	decl curr
 
 	movl curr, %eax
@@ -323,7 +323,7 @@ bkt_back:
 	movl curr, %ecx
 	movl (%edi, %ecx, 4), %eax
 
-	cmp $0, %eax
+	cmp $0, %eax # daca perm[curr] < 0, mergem mai in spate
 	jl bkt_back
 
 	jmp bkt
