@@ -223,7 +223,7 @@ bkt:
 	movl (%edi, %ecx, 4), %eax
 
 	cmp $0, %eax
-	jl bkt_next
+	jl bkt_skip
 
 	movl %eax, i
 	incl i # i = perm[curr] + 1
@@ -231,11 +231,64 @@ bkt:
 	movl $0, (%edi, %ecx, 4) # perm[curr] = 0
 	movl $0, elem
 
+	jmp bkt_loop
+
+bkt_loop:
+	movl i, %eax
+	cmp n, %eax
+	jg bkt_back
+
+	movl elem, %eax
+	cmp $0, %eax
+	jne bkt_next
+
+	movl i, %ecx
+	movl (%esi, %ecx, 4), %eax
+	cmp $3, %eax
+	jl bkt_loop_check
+
+	incl i
+	jmp bkt_loop
+
+bkt_loop_check:
+	movl curr, %eax
+	movl %eax, j
+
+	call check_elem
+
+	cmp $1, %eax
+	je bkt_found
+
+	incl i
+	jmp bkt_loop
+
+bkt_found:
+	movl i, %eax
+	movl %eax, elem
+	jmp bkt_loop
+
+bkt_skip:
 	incl curr
 	jmp bkt
 
 bkt_next:
+	movl curr, %ecx
+	movl elem, (%edi, %ecx, 4) # perm[curr] = elem
+
+	movl elem, %ecx
+	incl (%esi, %ecx, 4) # f[perm[curr]] += 1
 	incl curr
+	jmp bkt
+
+bkt_back:
+	decl curr
+
+	movl curr, %ecx
+	movl (%edi, %ecx, 4), %eax
+
+	cmp $0, %eax
+	jl bkt_back
+
 	jmp bkt
 
 bkt_exit:
@@ -247,12 +300,13 @@ bkt_exit:
 
 main:
 	call readproc
-	# call bkt_init
+	call bkt_init
 	call printproc
 	call backslashN
 	jmp exit
 
 exit:
+	/*
 	call backslashN
 
 	movl $3, j
@@ -267,6 +321,7 @@ exit:
 	popl %ebx
 
 	call backslashN
+	*/
 
 	movl $1, %eax
 	xorl %ebx, %ebx
