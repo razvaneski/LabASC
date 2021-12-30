@@ -273,7 +273,8 @@ bkt_skip:
 
 bkt_next:
 	movl curr, %ecx
-	movl elem, (%edi, %ecx, 4) # perm[curr] = elem
+	movl elem, %eax
+	movl %eax, (%edi, %ecx, 4) # perm[curr] = elem
 
 	movl elem, %ecx
 	incl (%esi, %ecx, 4) # f[perm[curr]] += 1
