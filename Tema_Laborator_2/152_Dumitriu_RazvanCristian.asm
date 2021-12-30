@@ -233,8 +233,6 @@ bkt:
 	movl $0, (%edi, %ecx, 4) # perm[curr] = 0
 	movl $0, elem
 
-	jmp bkt_loop
-
 	incl curr
 	jmp bkt
 
