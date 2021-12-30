@@ -13,38 +13,7 @@ void back(int curr) {
 		return;
 	}
 	else {
-		if(perm[curr] == 0) {
-			i = 1;
-			elem = 0;
-			while(i <= n && elem == 0) {
-				if(f[i] < 3) {
-					ok = 1;
-					for(j = 1; j <= m && curr - j > 0; j++)
-						if(perm[curr - j] == i)
-							ok = 0;
-					for(j = 1; j <= m && curr + j <= 3 * n; j++)
-						if(perm[curr + j] == i)
-							ok = 0;
-					if(ok)
-						elem = i;
-				}
-				i++;
-			}
-			if(elem != 0) {
-				f[elem]++;
-				perm[curr] = elem;
-				back(curr + 1);
-			}
-			else {
-				f[perm[curr]]--;
-				perm[curr] = 0;
-				curr--;
-				while(curr > 0 && init[curr] != 0)
-					curr--;
-				back(curr);
-			}
-		}
-		else if(init[curr] != 0) {
+		if(init[curr] != 0) {
 			back(curr + 1);
 		}
 		else {
