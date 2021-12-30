@@ -10,6 +10,8 @@
 	x: .space 4
 	aux: .space 4
 	curr: .space 4
+	cnt: .space 4
+	ok: .space 4
 
 	perm: .zero 1000 # permutarea finala - vom stoca elementele fixate cu minus
 	f: .zero 1000 # vector frecventa
@@ -118,6 +120,90 @@ printproc_continue:
 	popl %ebp
 	ret
 
+check_elem: # se va preinitializa pozitia prin variabila j, se returneaza t/f prin %eax
+	pushl %ebp
+	movl %esp, %ebp
+
+	movl $1, cnt
+	movl $1, ok
+
+check_left:
+	movl cnt, %eax
+	cmp m, %eax
+	jg check_next
+
+	movl j, %eax
+	subl cnt, %eax
+	movl %eax, poz
+
+	cmp $1, %eax
+	jl check_next
+
+	movl poz, %ecx
+	movl (%edi, %ecx, 4), %eax
+
+	movl j, %ecx
+	movl (%edi, %ecx, 4), %ebx
+
+	cmp %eax, %ebx
+	je check_fail
+
+	movl $-1, %ecx
+	xorl %edx, %edx
+	imull %ecx
+
+	cmp %eax, %ebx
+	je check_fail
+
+	incl cnt
+	jmp check_left
+
+check_next:
+	movl $1, cnt
+	jmp check_right
+
+check_right:
+	movl cnt, %eax
+	cmp m, %eax
+	jg check_pass
+
+	movl j, %eax
+	addl cnt, %eax
+	movl %eax, poz
+
+	cmp nrElem, %eax
+	jg check_pass
+
+	movl poz, %ecx
+	movl (%edi, %ecx, 4), %eax
+
+	movl j, %ecx
+	movl (%edi, %ecx, 4), %ebx
+
+	cmp %eax, %ebx
+	je check_fail
+
+	movl $-1, %ecx
+	xorl %edx, %edx
+	imull %ecx
+
+	cmp %eax, %ebx
+
+	je check_fail
+
+	incl cnt
+	jmp check_right
+
+check_fail:
+	movl $0, %eax
+	popl %ebp
+	ret
+
+check_pass:
+	movl $1, %eax
+	popl %ebp
+	ret
+
 bkt_init:
 	pushl %ebp
 	movl %esp, %ebp
@@ -141,7 +227,10 @@ bkt:
 	movl %eax, i
 	incl i # i = perm[curr] + 1
 	decl (%esi, %eax, 4) # f[perm[curr]] -= 1
-	movl $5, (%edi, %ecx, 4) # perm[curr] = 0
+	movl $0, (%edi, %ecx, 4) # perm[curr] = 0
+	movl $0, elem
+
+	jmp bkt_loop
 
 	incl curr
 	jmp bkt
@@ -159,12 +248,25 @@ bkt_exit:
 
 main:
 	call readproc
-	call bkt_init
+	# call bkt_init
 	call printproc
 	call backslashN
 	jmp exit
 
 exit:
+	/*
+	movl $3, j
+	call check_elem
+
+	pushl %eax
+	pushl $formatPrintf
+	call printf
+	popl %ebx
+	popl %ebx
+
+	call backslashN
+	*/
+
 	movl $1, %eax
 	xorl %ebx, %ebx
 	int $0x80
