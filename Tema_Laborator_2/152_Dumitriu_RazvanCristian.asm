@@ -255,7 +255,8 @@ main:
 	jmp exit
 
 exit:
-	/*
+
+	call backslashN
 	movl $3, j
 	call check_elem
 
@@ -266,7 +267,7 @@ exit:
 	popl %ebx
 
 	call backslashN
-	*/
+
 
 	movl $1, %eax
 	xorl %ebx, %ebx
