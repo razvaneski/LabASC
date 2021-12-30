@@ -205,6 +205,38 @@ check_pass:
 	popl %ebp
 	ret
 
+check_all:
+	pushl %ebp
+	movl %esp, %ebp
+
+	movl $1, j
+
+check_all_loop:
+	movl j, %eax
+	cmp nrElem, %eax
+	jg check_all_pass
+
+	movl j, %ecx
+	movl (%edi, %ecx, 4), %eax
+	movl %eax, i
+
+	call check_elem
+	cmp $0, %eax
+	je check_all_fail
+
+	incl j
+	jmp check_all_loop
+
+check_all_pass:
+	movl $1, %eax
+	popl %ebp
+	ret
+
+check_all_fail:
+	movl $0, %eax
+	popl %ebp
+	ret
+
 bkt_init:
 	pushl %ebp
 	movl %esp, %ebp
@@ -284,6 +316,10 @@ bkt_next:
 bkt_back:
 	decl curr
 
+	movl curr, %eax
+	cmp $1, %eax
+	jl bkt_impossible
+
 	movl curr, %ecx
 	movl (%edi, %ecx, 4), %eax
 
@@ -293,6 +329,12 @@ bkt_back:
 	jmp bkt
 
 bkt_exit:
+	movl $1, %eax
+	popl %ebp
+	ret
+
+bkt_impossible:
+	movl $0, %eax
 	popl %ebp
 	ret
 
@@ -302,7 +344,27 @@ bkt_exit:
 main:
 	call readproc
 	call bkt_init
+
+	cmp $0, %eax
+	je impossible_test
+
+	call check_all
+
+	cmp $0, %eax
+	je impossible_test
+
 	call printproc
+
+	call backslashN
+	jmp exit
+
+impossible_test:
+	pushl $-1
+	pushl $formatPrintf
+	call printf
+	popl %ebx
+	popl %ebx
+
 	call backslashN
 	jmp exit
 
