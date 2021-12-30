@@ -307,23 +307,6 @@ main:
 	jmp exit
 
 exit:
-	/*
-	call backslashN
-
-	movl $3, j
-	movl $2, i
-
-	call check_elem
-
-	pushl %eax
-	pushl $formatPrintf
-	call printf
-	popl %ebx
-	popl %ebx
-
-	call backslashN
-	*/
-
 	movl $1, %eax
 	xorl %ebx, %ebx
 	int $0x80
