@@ -1,3 +1,6 @@
+# Gasiti o explicatie detaliata a algoritmului, cat si o versiune recursiva in C aici:
+# https://github.com/razvaneski/LabASC/blob/a0db3dc0af74c288791ce0b4ca1d4bc6e3c316c5/Tema_Laborator_2/algoritm.c
+
 .data
 	formatPrintf: .asciz "%d "
 	formatNewline: .asciz "\n"
@@ -21,7 +24,7 @@
 
 .text
 
-backslashN:
+backslashN: # procedura pentru a afisa '\n'
 	pushl %ebp
 	movl %esp, %ebp
 
@@ -32,7 +35,7 @@ backslashN:
 	popl %ebp
 	ret
 
-readproc:
+readproc: # procedura de citire
 	pushl %ebp
 	movl %esp, %ebp
 
@@ -85,7 +88,7 @@ readproc_loop:
 	popl %ebp
 	ret
 
-printproc:
+printproc: # procedura de afisare; se face inmultire cu -1 pt elementele negative
 	pushl %ebp
 	movl %esp, %ebp
 
@@ -123,14 +126,17 @@ printproc_continue:
 	popl %ebp
 	ret
 
-check_elem: # se va preinitializa pozitia prin variabila j, valoarea prin i, se returneaza t/f prin %eax
+check_elem: # verifica daca i este unic pe intervalul [j - m, j + m]
+			# parametri: prin variabila i - valoarea care trebuie verificata
+			#			 prin variabila j - pozitia unde trebuie sa testam
+			# returneaza 0/1 prin %eax
 	pushl %ebp
 	movl %esp, %ebp
 
 	movl $1, cnt
 	movl $1, ok
 
-check_left:
+check_left: # verificare pe intervalul [j - m, j)
 	movl cnt, %eax
 	cmp m, %eax
 	jg check_next
@@ -164,7 +170,7 @@ check_next:
 	movl $1, cnt
 	jmp check_right
 
-check_right:
+check_right: # verificare pe intervalul (j, j + m]
 	movl cnt, %eax
 	cmp m, %eax
 	jg check_pass
@@ -205,7 +211,8 @@ check_pass:
 	popl %ebp
 	ret
 
-check_all:
+check_all: # verifica unicitatea elementelor, conform cerintei, pentru tot vectorul
+		   # prin apelarea procedurii check_elem
 	pushl %ebp
 	movl %esp, %ebp
 
@@ -237,7 +244,7 @@ check_all_fail:
 	popl %ebp
 	ret
 
-bkt_init:
+bkt_init: # vom returna 0 prin %eax, in cazul in care constatam ca nu exista solutie
 	pushl %ebp
 	movl %esp, %ebp
 
